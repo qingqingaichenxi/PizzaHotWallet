@@ -2,4 +2,6 @@
     <string name="app_name">PizzaWallet</string>
 
     <string name="toobar_title">标题</string>
+    <string name="follow_home">首页</string>
+    <string name="my">账户</string>
 </resources>

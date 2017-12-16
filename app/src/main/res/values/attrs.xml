@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+   <declare-styleable name="TabButton">
+       <!--初始显示的图标-->
+       <attr name="image" format="reference"/>
+       <!--选中之后显示的图标-->
+       <attr name="clickimage" format="reference"/>
+       <!--选中之后显示的颜色-->
+       <attr name="clickcolor" format="color"/>
+       <!--图标下显示的文字，不要太长！-->
+       <attr name="text" format="string"/>
+       <!--文字的大小-->
+       <attr name="textsize" format="dimension"/>
+   </declare-styleable>
+
+    <declare-styleable name="Dialog">
+    <attr name="DialogTitleAppearance" format="reference" />
+    <attr name="DialogTitleText" format="reference|string" />
+    <attr name="DialogSpotColor" format="reference|color"/>
+    <attr name="DialogSpotCount" format="integer"/>
+    </declare-styleable>
+    <string-array name="nations">
+        <item>汉族</item>
+        <item>壮族</item>
+        <item>回族</item>
+        <item>满族</item>
+        <item>维吾尔族</item>
+        <item>苗族</item>
+        <item>彝族</item>
+        <item>土家族</item>
+        <item>藏族</item>
+        <item>蒙古族</item>
+        <item>侗族</item>
+        <item>布依族</item>
+        <item>瑶族</item>
+        <item>白族</item>
+        <item>朝鲜族</item>
+        <item>哈尼族</item>
+        <item>黎族</item>
+        <item>哈萨克族</item>
+        <item>傣族</item>
+        <item>畲族</item>
+        <item>傈僳族</item>
+        <item>东乡族</item>
+        <item>仡佬族</item>
+        <item>拉祜族</item>
+        <item>佤族</item>
+        <item>水族</item>
+        <item>纳西族</item>
+        <item>羌族</item>
+        <item>土族</item>
+        <item>仫佬族</item>
+        <item>锡伯族</item>
+        <item>柯尔克孜族</item>
+        <item>景颇族</item>
+        <item>达斡尔族</item>
+        <item>撒拉族</item>
+        <item>布朗族</item>
+        <item>毛南族</item>
+        <item>塔吉克族</item>
+        <item>普米族</item>
+        <item>阿昌族</item>
+        <item>怒族</item>
+        <item>鄂温克族</item>
+        <item>京族</item>
+        <item>基诺族</item>
+        <item>德昂族</item>
+        <item>保安族</item>
+        <item>俄罗斯族</item>
+        <item>裕固族</item>
+        <item>乌孜别克族</item>
+        <item>门巴族</item>
+        <item>鄂伦春族</item>
+        <item>独龙族</item>
+        <item>赫哲族</item>
+        <item>高山族</item>
+        <item>珞巴族</item>
+        <item>塔塔尔族</item>
+        <item>未识别民族</item>
+        <item>入籍外国人</item>
+    </string-array>
+    <declare-styleable name="FlexboxLayout">
+        <attr name="flexDirection">
+            <enum name="row" value="0" />
+            <enum name="row_reverse" value="1" />
+            <enum name="column" value="2" />
+            <enum name="column_reverse" value="3" />
+        </attr>
+
+        <attr name="flexWrap">
+            <enum name="nowrap" value="0" />
+            <enum name="wrap" value="1" />
+            <enum name="wrap_reverse" value="2" />
+        </attr>
+
+        <!--
+            Omitting flex-flow property since it's reflected in the parent flex container.
+            Set the flexDirection and/or flexWrap to the parent flex container explicitly if you
+            want to use the flex-flow similar way to the web.
+         -->
+
+        <attr name="justifyContent">
+            <enum name="flex_start" value="0" />
+            <enum name="flex_end" value="1" />
+            <enum name="center" value="2" />
+            <enum name="space_between" value="3" />
+            <enum name="space_around" value="4" />
+        </attr>
+
+        <attr name="alignItems">
+            <enum name="flex_start" value="0" />
+            <enum name="flex_end" value="1" />
+            <enum name="center" value="2" />
+            <enum name="baseline" value="3" />
+            <enum name="stretch" value="4" />
+        </attr>
+
+        <attr name="alignContent">
+            <enum name="flex_start" value="0" />
+            <enum name="flex_end" value="1" />
+            <enum name="center" value="2" />
+            <enum name="space_between" value="3" />
+            <enum name="space_around" value="4" />
+            <enum name="stretch" value="5" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FlexboxLayout_Layout">
+        <attr name="layout_order" format="integer" />
+
+        <!-- Negative numbers are invalid. -->
+        <attr name="layout_flexGrow" format="float" />
+
+        <!-- Negative numbers are invalid. -->
+        <attr name="layout_flexShrink" format="float" />
+
+        <!--
+            The initial length in a percentage format relative to its parent. This is similar to the
+            flex-basis property in the original CSS specification.
+            (https://www.w3.org/TR/css-flexbox-1/#flex-basis-property)
+            But unlike the flex-basis property, this attribute only accepts a value in fraction
+            (percentage), whereas flex-basis property accepts width values such as 1em, 10px and
+            the 'content' string.
+            But specifying initial fixed width values can be done by specifying width values in
+            layout_width (or layout_height, varies depending on the flexDirection). Also the same
+            effect can be done by specifying "wrap_contnet" in layout_width (or layout_height) if
+            developers want to achieve the same effect as 'content'.
+            Thus, this attribute only accepts fraction values, which can't be done through
+            layout_width (or layout_height) for simplicity.
+        -->
+        <attr name="layout_flexBasisPercent" format="fraction" />
+
+        <!--
+            Omitting flex property since it's a shorthand for layout_flexGrow and layout_flexShrink
+            and layout_percentInParent (flex-basis in the original CSS spec).
+        -->
+
+        <attr name="layout_alignSelf">
+            <enum name="auto" value="-1" />
+            <!-- The values below need to match the values of alignItems -->
+            <enum name="flex_start" value="0" />
+            <enum name="flex_end" value="1" />
+            <enum name="center" value="2" />
+            <enum name="baseline" value="3" />
+            <enum name="stretch" value="4" />
+        </attr>
+    </declare-styleable>
+    <string-array name="disease0">
+        <item>1型糖尿病</item>
+        <item>2型糖尿病</item>
+        <item>特殊类型糖尿病</item>
+        <item>妊娠糖尿病</item>
+    </string-array>
+</resources>

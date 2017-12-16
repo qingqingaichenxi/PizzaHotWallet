@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal">
+
+    <com.xcoinpay.pizza.pizzawallet.widget.TabButton
+        android:id="@+id/tab_home"
+        style="@style/main_tabbutton"
+        app:clickimage="@mipmap/home1"
+        app:image="@mipmap/home"
+        app:text="@string/follow_home"
+        app:textsize="@dimen/font_12sp" />
+
+    <!--<com.adtec.library.widget.TabButton-->
+        <!--android:id="@+id/tab_first"-->
+        <!--style="@style/main_tabbutton"-->
+        <!--app:clickimage="@drawable/sf1"-->
+        <!--app:image="@drawable/sf"-->
+        <!--app:text="@string/follow_up"-->
+        <!--app:textsize="@dimen/font_12sp" />-->
+
+    <!--<com.adtec.library.widget.TabButton-->
+        <!--android:id="@+id/tab_second"-->
+        <!--style="@style/main_tabbutton"-->
+        <!--app:clickimage="@drawable/doctor1"-->
+        <!--app:image="@drawable/doctor"-->
+        <!--app:text="@string/my_doctor"-->
+        <!--app:textsize="@dimen/font_12sp" />-->
+
+    <!--<com.adtec.library.widget.TabButton-->
+        <!--android:id="@+id/tab_third"-->
+        <!--style="@style/main_tabbutton"-->
+        <!--app:clickimage="@drawable/sq1"-->
+        <!--app:image="@drawable/sq"-->
+        <!--app:text="@string/community"-->
+        <!--app:textsize="@dimen/font_12sp" />-->
+
+    <com.xcoinpay.pizza.pizzawallet.widget.TabButton
+        android:id="@+id/tab_my"
+        style="@style/main_tabbutton"
+        app:clickimage="@mipmap/mine1"
+        app:image="@mipmap/mine"
+        app:text="@string/my"
+        app:textsize="@dimen/font_12sp" />
+</LinearLayout>
