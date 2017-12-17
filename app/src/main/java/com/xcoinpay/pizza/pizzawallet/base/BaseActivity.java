@@ -27,11 +27,11 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         super.onCreate(savedInstanceState);
         View baseview = LayoutInflater.from(this).inflate(R.layout.base_activity, null);
         FrameLayout contener = baseview.findViewById(R.id.baseview_fl_contaner);
-        ButterKnife.bind(this);
+
         View childView = LayoutInflater.from(this).inflate(getLayoutId(), null);
         contener.addView(childView);
 
-
+        ButterKnife.bind(this,childView);
 
         initToolbar();
         init();

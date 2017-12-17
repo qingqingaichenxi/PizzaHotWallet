@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:padding="6dp">
+    android:padding="6dp"
+    android:background="@color/colorPrimary">
     <ImageView
         android:id="@+id/toolbar_left_iv"
         android:layout_width="wrap_content"
@@ -16,6 +17,7 @@
     <TextView
         android:id="@+id/toolbar_tv"
         android:layout_width="0dp"
+        android:textColor="#FFF"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:text="@string/toobar_title"

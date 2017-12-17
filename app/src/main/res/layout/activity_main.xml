@@ -8,11 +8,12 @@
     android:layout_height="match_parent"
     tools:context="com.xcoinpay.pizza.pizzawallet.view.MainActivity">
 
-        <FrameLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:id="@+id/fl_main"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"></FrameLayout>
+            android:layout_weight="1"></LinearLayout>
 
         <include layout="@layout/tab_bottom"/>
         <!--<TextView-->

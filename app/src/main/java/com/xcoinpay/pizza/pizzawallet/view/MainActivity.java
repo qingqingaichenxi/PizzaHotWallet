@@ -1,12 +1,18 @@
 package com.xcoinpay.pizza.pizzawallet.view;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.view.fragment.HomeFragment;
@@ -23,15 +29,18 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.fl_main)
-    FrameLayout main_container;
+    LinearLayout main_container;
    @BindView(R.id.tab_home)
    TabButton mTabHome;
    @BindView(R.id.tab_my)
    TabButton mTabMy;
     public ArrayList<Fragment> fgs;
     private List<View> mTabButtonList;
-    private int[] mTitles = {R.string.follow_home, R.string.my};
+//    private int[] mTitles = {R.string.follow_home, R.string.my};
     private int mCurrIndex = -1;
+
+    public static int REQUEST_CODE = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick({R.id.tab_home,R.id.tab_my})
     public void click(View view){
         int number = (Integer) view.getTag();
+        view.setFocusable(true);
         change(number);
     }
 
@@ -84,7 +94,9 @@ public class MainActivity extends AppCompatActivity {
 //                return;
 //            }
 //        }
-
+        //1f是选中的。0f是没有选中的
+        mTabHome.setAlpha(index==0? 1f : 0f);
+        mTabMy.setAlpha(index==1? 1f : 0f);
         if (index != mCurrIndex) {
             mCurrIndex = index;
             changeFragment(index);
@@ -103,4 +115,43 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
 
     }
+
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        Log.i("data;;;;;","//////////////");
+//        /**
+//         * 处理二维码扫描结果
+//         */
+//        if (requestCode == REQUEST_CODE) {
+//            //处理扫描结果（在界面上显示）
+//            if (null != data) {
+//                Bundle bundle = data.getExtras();
+//                if (bundle == null) {
+//                    return;
+//                }
+//                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+//                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+//                    Toast.makeText(this, "解析结果:" + result, Toast.LENGTH_LONG).show();
+//                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+//                    Toast.makeText(this, "解析二维码失败", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//        }
+//    }
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+    if(result != null) {
+        if(result.getContents() == null) {
+            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Scanned: 扫描成功" + result.getContents(), Toast.LENGTH_LONG).show();
+        }
+    } else {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+}
 }

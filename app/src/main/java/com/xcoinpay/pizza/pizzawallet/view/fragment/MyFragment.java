@@ -1,5 +1,7 @@
 package com.xcoinpay.pizza.pizzawallet.view.fragment;
 
+import android.view.View;
+
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseFragment;
 import com.xcoinpay.pizza.pizzawallet.base.IView;
@@ -17,7 +19,7 @@ public  class MyFragment extends BaseFragment<MyPresenter>{
 
     @Override
     public void init() {
-//        toolbar_title.setText("账户");
+       toolbar.setVisibility(View.GONE);
 
     }
 

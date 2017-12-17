@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 
@@ -24,17 +26,18 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
 
     public P presnter;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View basefragmentview = inflater.inflate(R.layout.basefragment, null);
+        View basefragmentview = View.inflate(getContext(),R.layout.basefragment, null);
         FrameLayout fl_concainer = basefragmentview.findViewById(R.id.fl_fragment);
 
-        View childview  = inflater.inflate(getLayoutId(), null);
+        View childview  = View.inflate(getContext(), getLayoutId(), null);
         ButterKnife.bind(this,childview);
         fl_concainer.addView(childview);
 
-        initToolbar(childview);
+        initToolbar(basefragmentview);
         //每一个view实现这个方法。初始化view的
         init();
 
@@ -49,10 +52,12 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     public ImageView toolbar_left_iv;
     public ImageView toolbar_right_iv;
     public TextView toolbar_title;
-    protected  void initToolbar(View childview){
-        toolbar_left_iv = childview.findViewById(R.id.toolbar_left_iv);
-        toolbar_right_iv = childview.findViewById(R.id.toolbar_right_iv);
-        toolbar_title = childview.findViewById(R.id.toolbar_tv);
+    public LinearLayout toolbar;
+    protected  void initToolbar(View basefragmentview){
+        toolbar = basefragmentview.findViewById(R.id.toolbar);
+        toolbar_left_iv = basefragmentview.findViewById(R.id.toolbar_left_iv);
+        toolbar_right_iv = basefragmentview.findViewById(R.id.toolbar_right_iv);
+        toolbar_title = basefragmentview.findViewById(R.id.toolbar_tv);
     };
 
     @Override

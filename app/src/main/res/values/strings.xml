@@ -4,4 +4,8 @@
     <string name="toobar_title">标题</string>
     <string name="follow_home">首页</string>
     <string name="my">账户</string>
+
+    <string name="scan">扫描</string>
+    <string name="dressbook">地址簿</string>
+    <string name="tradebook">交易记录</string>
 </resources>
