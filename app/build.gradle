@@ -35,9 +35,15 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     //zxing
-    //    compile 'cn.yipianfengye.android:zxing-library:2.2'
-    compile 'com.journeyapps:zxing-android-embedded:3.5.0'
+
+    compile 'com.google.zxing:core:3.3.0'
+    compile 'cn.bingoogolapple:bga-qrcodecore:1.1.9@aar'
+    compile 'cn.bingoogolapple:bga-zxing:1.1.9@aar'
+    // -------------------- 以上三个库是必须依赖的 ------
     //圆形的图片显示
     compile 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'com.android.support:recyclerview-v7:25.0.1'
+
+    //数据传递用Eventbus
+    compile 'org.greenrobot:eventbus:3.1.1'
 }

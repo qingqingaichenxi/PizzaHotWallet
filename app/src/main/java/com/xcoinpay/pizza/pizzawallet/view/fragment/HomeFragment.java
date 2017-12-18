@@ -6,21 +6,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.integration.android.IntentIntegrator;
-
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseFragment;
 import com.xcoinpay.pizza.pizzawallet.presenter.HomePresenter;
 import com.xcoinpay.pizza.pizzawallet.view.AddressBookActivity;
+import com.xcoinpay.pizza.pizzawallet.view.TestScanActivity;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bingoogolapple.qrcode.core.BGAQRCodeUtil;
+import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
 
 /**
  * Created by llq on 2017/12/16 0016.
@@ -58,10 +58,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> {
     public void click(View view) {
         switch (view.getId()) {
             case R.id.ll_scan:
-//                Intent intent = new Intent(getActivity(), CaptureActivity.class);
-//                startActivityForResult(intent, MainActivity.REQUEST_CODE);
-//                IntentIntegrator.forSupportFragment(this).initiateScan();
-                new IntentIntegrator(getActivity()).initiateScan();
+                startActivity(new Intent(getActivity(), TestScanActivity.class));//跳转到扫描界面
                 break;
             case R.id.ll_dressbook:
                 startActivity(new Intent(getActivity(),AddressBookActivity.class));
@@ -74,23 +71,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> {
                 break;
         }
     }
-
-
-    Bitmap encodeAsBitmap(String str) {
-        Bitmap bitmap = null;
-        BitMatrix result = null;
-        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-        try {
-            result = multiFormatWriter.encode(str, BarcodeFormat.QR_CODE, 200, 200);
-            // 使用 ZXing Android Embedded 要写的代码
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            bitmap = barcodeEncoder.createBitmap(result);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException iae) { // ?
-            return null;
-        }
-        return bitmap;
+//生成二维码图片的方法
+    private Bitmap encodeAsBitmap(String fsdfgdfgf) {
+        return QRCodeEncoder.syncEncodeQRCode("fsdfgdfgf", BGAQRCodeUtil.dp2px(getActivity(), 150));
     }
 
+    //接收扫完码传递过来的数据
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public  void onEvent(String result){
+        Toast.makeText(getActivity(),"扫描成功"+result,Toast.LENGTH_SHORT).show();
+    }
 }

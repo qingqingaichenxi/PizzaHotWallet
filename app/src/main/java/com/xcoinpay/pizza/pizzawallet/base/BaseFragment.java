@@ -15,6 +15,8 @@ import android.widget.Toolbar;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 
 /**
@@ -45,6 +47,9 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
         if(presnter !=null){
             presnter.init();
         }
+
+
+        EventBus.getDefault().register(this);
         return basefragmentview;
 
     }

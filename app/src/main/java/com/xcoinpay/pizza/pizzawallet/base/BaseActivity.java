@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 
 /**
@@ -40,6 +42,9 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         if(presenter!=null){
             presenter.init();
         }
+
+
+        EventBus.getDefault().register(this);
     }
 
      TextView toolbar_title;

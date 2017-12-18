@@ -38,7 +38,8 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> {
     public int getLayoutId() {
         return R.layout.activity_add_address;
     }
-   @OnClick()
+
+   @OnClick(R.id.ll_selectbi)
     public void click(View view ){
         switch (view.getId()){
             case R.id.ll_selectbi:

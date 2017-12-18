@@ -1,18 +1,12 @@
 package com.xcoinpay.pizza.pizzawallet.view;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.view.fragment.HomeFragment;
@@ -117,41 +111,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        Log.i("data;;;;;","//////////////");
-//        /**
-//         * 处理二维码扫描结果
-//         */
-//        if (requestCode == REQUEST_CODE) {
-//            //处理扫描结果（在界面上显示）
-//            if (null != data) {
-//                Bundle bundle = data.getExtras();
-//                if (bundle == null) {
-//                    return;
-//                }
-//                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
-//                    String result = bundle.getString(CodeUtils.RESULT_STRING);
-//                    Toast.makeText(this, "解析结果:" + result, Toast.LENGTH_LONG).show();
-//                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-//                    Toast.makeText(this, "解析二维码失败", Toast.LENGTH_LONG).show();
-//                }
-//            }
 //
+//@Override
+//protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//    IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+//    if(result != null) {
+//        if(result.getContents() == null) {
+//            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+//        } else {
+//            Toast.makeText(this, "Scanned: 扫描成功" + result.getContents(), Toast.LENGTH_LONG).show();
 //        }
+//    } else {
+//        super.onActivityResult(requestCode, resultCode, data);
 //    }
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-    if(result != null) {
-        if(result.getContents() == null) {
-            Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Scanned: 扫描成功" + result.getContents(), Toast.LENGTH_LONG).show();
-        }
-    } else {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-}
+//}
 }

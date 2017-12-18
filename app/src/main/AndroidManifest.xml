@@ -27,6 +27,7 @@
         <activity android:name=".view.AddressBookActivity" />
         <activity android:name=".view.AddAddressActivity" />
         <activity android:name=".view.SelectBiActivity"></activity>
+        <activity android:name=".view.TestScanActivity"></activity>
     </application>
 
 </manifest>
