@@ -2,13 +2,10 @@ package com.xcoinpay.pizza.pizzawallet.view.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -20,7 +17,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseFragment;
 import com.xcoinpay.pizza.pizzawallet.presenter.HomePresenter;
-import com.xcoinpay.pizza.pizzawallet.view.MainActivity;
+import com.xcoinpay.pizza.pizzawallet.view.AddressBookActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -67,6 +64,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> {
                 new IntentIntegrator(getActivity()).initiateScan();
                 break;
             case R.id.ll_dressbook:
+                startActivity(new Intent(getActivity(),AddressBookActivity.class));
                 break;
             case R.id.ll_tradebook:
                 break;

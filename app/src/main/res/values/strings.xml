@@ -8,4 +8,10 @@
     <string name="scan">扫描</string>
     <string name="dressbook">地址簿</string>
     <string name="tradebook">交易记录</string>
+    <string name="addresstitle">地址薄</string>
+    <string name="kind">币种</string>
+    <string name="select_bi">选择</string>
+    <string name="yes">确定</string>
+    <string name="login">登录</string>
+
 </resources>

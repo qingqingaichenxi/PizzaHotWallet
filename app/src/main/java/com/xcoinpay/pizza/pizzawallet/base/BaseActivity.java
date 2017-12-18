@@ -17,18 +17,19 @@ import butterknife.ButterKnife;
  * Created by llq on 2017/12/15.
  */
 
-public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivity implements IView<P>{
+public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivity implements IView<P> ,View.OnClickListener{
 
     public P presenter;
+    private View baseview;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View baseview = LayoutInflater.from(this).inflate(R.layout.base_activity, null);
+        baseview = View.inflate(this,R.layout.base_activity, null);
         FrameLayout contener = baseview.findViewById(R.id.baseview_fl_contaner);
-
-        View childView = LayoutInflater.from(this).inflate(getLayoutId(), null);
+        setContentView(baseview);
+        View childView = View.inflate(this,getLayoutId(), null);
         contener.addView(childView);
 
         ButterKnife.bind(this,childView);
@@ -41,13 +42,17 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         }
     }
 
-    public TextView toolbar_title;
-    public ImageView toolbar_right_iv;
-    public ImageView toolbar_left_iv;
+     TextView toolbar_title;
+     ImageView toolbar_right_iv;
+     ImageView toolbar_left_iv;
     protected  void initToolbar(){
-        toolbar_left_iv = findViewById(R.id.toolbar_left_iv);
-        toolbar_right_iv = findViewById(R.id.toolbar_right_iv);
-        toolbar_title = findViewById(R.id.toolbar_tv);
+        toolbar_left_iv = baseview.findViewById(R.id.toolbar_left_iv);
+        toolbar_right_iv = baseview.findViewById(R.id.toolbar_right_iv);
+        toolbar_title = baseview.findViewById(R.id.toolbar_tv);
+
+        toolbar_left_iv.setOnClickListener(this);
+        toolbar_right_iv.setOnClickListener(this);
+
     };
 
     @Override
@@ -56,6 +61,27 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
         if(presenter!=null)
             presenter.onDetory();
         }
+    public void setSupToolbar(String title,int imgId){
+        toolbar_title.setText(title);
 
+        if(imgId>0){
+            toolbar_right_iv.setVisibility(View.VISIBLE);
+            toolbar_right_iv.setBackgroundResource(imgId);
+        }
+    };
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.toolbar_left_iv:
+                finish();
+                break;
+            case R.id.toolbar_right_iv:
+                onRightClick();
+                break;
+        }
+
+    }
+
+    protected  void onRightClick(){};
 }

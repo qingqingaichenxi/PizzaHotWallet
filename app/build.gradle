@@ -20,24 +20,24 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
     //网络请求
     compile 'com.squareup.okhttp3:okhttp:3.9.1'
     compile 'com.squareup.okio:okio:1.13.0'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-
     //butterknife
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-
-//zxing
-//    compile 'cn.yipianfengye.android:zxing-library:2.2'
+    //zxing
+    //    compile 'cn.yipianfengye.android:zxing-library:2.2'
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
+    //圆形的图片显示
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'com.android.support:recyclerview-v7:25.0.1'
 }
