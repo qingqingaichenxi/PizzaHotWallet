@@ -26,8 +26,11 @@
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.AddressBookActivity" />
         <activity android:name=".view.AddAddressActivity" />
-        <activity android:name=".view.SelectBiActivity"></activity>
-        <activity android:name=".view.TestScanActivity"></activity>
+        <activity android:name=".view.SelectBiActivity" />
+        <activity android:name=".view.TestScanActivity" />
+        <activity android:name=".view.TradeBookActivity" />
+        <activity android:name=".view.RegistActivity" />
+        <activity android:name=".view.ForgetActivity"></activity>
     </application>
 
 </manifest>

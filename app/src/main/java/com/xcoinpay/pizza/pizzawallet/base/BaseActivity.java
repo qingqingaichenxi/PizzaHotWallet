@@ -60,12 +60,7 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
 
     };
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if(presenter!=null)
-            presenter.onDetory();
-        }
+
     public void setSupToolbar(String title,int imgId){
         toolbar_title.setText(title);
 
@@ -89,4 +84,14 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     }
 
     protected  void onRightClick(){};
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(presenter!=null)
+            presenter.onDetory();
+        EventBus.getDefault().unregister(this);
+
+    }
+
 }

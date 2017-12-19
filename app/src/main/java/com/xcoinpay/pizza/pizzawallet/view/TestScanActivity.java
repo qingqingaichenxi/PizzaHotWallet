@@ -62,7 +62,7 @@ public class TestScanActivity extends AppCompatActivity implements QRCodeView.De
 //        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
         vibrate();
         finish();
-        EventBus.getDefault().post(result);
+        EventBus.getDefault().post(result);//巴扫描的结果发送给HOmefragment
 //        mQRCodeView.startSpot();
     }
 

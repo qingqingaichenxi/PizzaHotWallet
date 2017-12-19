@@ -12,6 +12,9 @@ import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseActivity;
 import com.xcoinpay.pizza.pizzawallet.presenter.AddAddressPresenter;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -49,4 +52,8 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> {
                 break;
         }
    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public  void onEvent(String string){
+
+    }
 }

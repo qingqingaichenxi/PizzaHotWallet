@@ -10,6 +10,9 @@ import com.xcoinpay.pizza.pizzawallet.base.IView;
 import com.xcoinpay.pizza.pizzawallet.presenter.MyPresenter;
 import com.xcoinpay.pizza.pizzawallet.view.LoginActivity;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -42,5 +45,10 @@ public  class MyFragment extends BaseFragment<MyPresenter>{
                 startActivity(new Intent(getActivity(),LoginActivity.class));
                 break;
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public  void onEvent(String string){
+
     }
 }

@@ -13,6 +13,7 @@ import com.xcoinpay.pizza.pizzawallet.base.BaseFragment;
 import com.xcoinpay.pizza.pizzawallet.presenter.HomePresenter;
 import com.xcoinpay.pizza.pizzawallet.view.AddressBookActivity;
 import com.xcoinpay.pizza.pizzawallet.view.TestScanActivity;
+import com.xcoinpay.pizza.pizzawallet.view.TradeBookActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -64,16 +65,17 @@ public class HomeFragment extends BaseFragment<HomePresenter> {
                 startActivity(new Intent(getActivity(),AddressBookActivity.class));
                 break;
             case R.id.ll_tradebook:
+                startActivity(new Intent(getActivity(),TradeBookActivity.class));
                 break;
             case R.id.btn_barcode:
-                Bitmap img = encodeAsBitmap("fsdfgdfgf");
+                Bitmap img = encodeAsBitmap("我爱俊哥@");
                 iv.setImageBitmap(img);
                 break;
         }
     }
 //生成二维码图片的方法
     private Bitmap encodeAsBitmap(String fsdfgdfgf) {
-        return QRCodeEncoder.syncEncodeQRCode("fsdfgdfgf", BGAQRCodeUtil.dp2px(getActivity(), 150));
+        return QRCodeEncoder.syncEncodeQRCode("我爱俊哥@", BGAQRCodeUtil.dp2px(getActivity(), 150));
     }
 
     //接收扫完码传递过来的数据

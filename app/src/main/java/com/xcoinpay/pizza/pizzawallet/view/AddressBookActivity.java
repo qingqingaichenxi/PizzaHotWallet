@@ -9,6 +9,9 @@ import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseActivity;
 import com.xcoinpay.pizza.pizzawallet.presenter.AddressPresenter;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 public class AddressBookActivity extends BaseActivity<AddressPresenter> {
 
 
@@ -33,5 +36,9 @@ public class AddressBookActivity extends BaseActivity<AddressPresenter> {
     protected void onRightClick() {
 //        Toast.makeText(this, "添加地址薄", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this,AddAddressActivity.class));
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public  void onEvent(String string){
+
     }
 }

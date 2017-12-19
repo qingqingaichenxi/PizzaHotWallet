@@ -72,5 +72,7 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
         if(presnter!=null){
             presnter.onDetory();
         }
+
+        EventBus.getDefault().unregister(this);
     }
 }

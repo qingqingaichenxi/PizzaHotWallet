@@ -5,31 +5,31 @@ import android.os.Bundle;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseActivity;
-import com.xcoinpay.pizza.pizzawallet.presenter.SelectPresenter;
+import com.xcoinpay.pizza.pizzawallet.presenter.RegistPresenter;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class SelectBiActivity extends BaseActivity<SelectPresenter> {
+public class RegistActivity extends BaseActivity<RegistPresenter> {
 
 
     @Override
-    public SelectPresenter getPresnter() {
-        return new SelectPresenter();
+    public RegistPresenter getPresnter() {
+        return new RegistPresenter();
     }
 
     @Override
     public void init() {
-
+        setSupToolbar("注册",0);
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_select_bi;
+        return R.layout.activity_regist;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public  void onEvent(String string){
+    public void onEvent(String string){
 
     }
 }
