@@ -1,5 +1,7 @@
 package com.xcoinpay.pizza.pizzawallet.presenter;
 
+import android.widget.Toast;
+
 import com.xcoinpay.pizza.pizzawallet.base.BasePresenter;
 
 /**
@@ -7,4 +9,9 @@ import com.xcoinpay.pizza.pizzawallet.base.BasePresenter;
  */
 
 public class RegistPresenter extends BasePresenter {
+
+    public void regist(boolean mobileNO, boolean pwdNo) {
+//        Toast.makeText(this,)
+    }
 }
+
