@@ -82,6 +82,14 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
             Toast.makeText(this, "确认密码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
+        if(getPwd().length()<6){
+            Toast.makeText(this, "密码不能少于六位", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(getRPwd().length()<6){
+            Toast.makeText(this, "确认密码不能少于六位", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if(!getPwd().equals(getRPwd())){
             Toast.makeText(this, "两次密码不一致", Toast.LENGTH_SHORT).show();
             return;

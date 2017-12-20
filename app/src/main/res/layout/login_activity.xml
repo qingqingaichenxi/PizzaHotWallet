@@ -35,7 +35,7 @@ android:background="#EDEDEB"
         android:hint="手机号"
         android:maxLength="11"
         android:layout_marginLeft="5dp"
-        android:digits="0123456789"
+        android:digits="0123456789qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM_"
         />
         <ImageView
             android:id="@+id/iv_clearphone"
