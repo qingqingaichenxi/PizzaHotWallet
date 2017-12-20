@@ -10,7 +10,7 @@ import com.xcoinpay.pizza.pizzawallet.base.IPresenter;
 
 public class LoginPresenter implements IPresenter {
 
-    public void login(boolean mobileNO, boolean pwdNo){
+    public void login(String mobileNO, String pwdNo){
         Log.i("登录","登录放回的数据啊 啊 4444444444 啊啊  ");
     }
     @Override

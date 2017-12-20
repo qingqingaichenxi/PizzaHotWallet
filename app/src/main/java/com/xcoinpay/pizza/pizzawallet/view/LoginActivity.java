@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseActivity;
+import com.xcoinpay.pizza.pizzawallet.bean.Event;
 import com.xcoinpay.pizza.pizzawallet.contant.Contant;
 import com.xcoinpay.pizza.pizzawallet.presenter.LoginPresenter;
+import com.xcoinpay.pizza.pizzawallet.util.EncryptUtil;
 import com.xcoinpay.pizza.pizzawallet.util.SMSUtil;
 import com.xcoinpay.pizza.pizzawallet.util.SPUtils;
 
@@ -66,8 +68,17 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
 
 //接受传递过来的数据
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public  void onEvent(String string){
+    public  void onEvent(Event event){
+        switch (event.code){
+            case 1:
+                Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+                //把返回的用户信息和token保存到本地
+                break;
+            case 2:
+                Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
 
+                break;
+        }
     }
 
     @OnClick({R.id.login_tv_regist,R.id.login_tv_forgetpwd,R.id.loagin,R.id.iv_clearphone,R.id.iv_clearpwd})
@@ -91,18 +102,34 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
         }
     }
 
+
     private void login() {
-        SMSUtil.judgePhoneNums(this,getPhone());
-        boolean mobileNO = SMSUtil.isMobileNO(getPhone());
-        boolean pwdNo = TextUtils.isEmpty(getPwd());
-        if(mobileNO && !pwdNo){
-            presenter.login(mobileNO,pwdNo);
+
+        //1.校验手机号码和密码是否为空
+        if(TextUtils.isEmpty(getPhone())){
+            Toast.makeText(this,"手机号码不能为空",Toast.LENGTH_SHORT).show();
+            return;
         }
+        if(TextUtils.isEmpty(getPwd())){
+            Toast.makeText(this,"密码不能为空",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(getPwd().length()<6){
+            Toast.makeText(this,"密码不能少于六位",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //2.校验手机号码是否合法
+        boolean isPhoneOk = SMSUtil.judgePhoneNums(this, getPhone());
 
-        //保存用戶的信息
-        SPUtils.putString(this, Contant.username,getPhone());
-        SPUtils.putString(this,Contant.userpwd,getPwd());
+        if(!isPhoneOk ){
+            Toast.makeText(this, "手机号码不合法", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //3.对密码进行加密
+        String salt = "pizzawallet";
+        String saltpwd = EncryptUtil.shaEncrypt(getPwd() + salt);
 
+        presenter.login(getPhone(),saltpwd);
 
     }
 

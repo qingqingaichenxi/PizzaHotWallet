@@ -10,7 +10,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- * Created by itheima.
+ * Created by llq.
  */
 public class SMSUtil {
     /**
@@ -22,7 +22,7 @@ public class SMSUtil {
                 && isMobileNO(phoneNums)) {
             return true;
         }
-        Toast.makeText(activity, "手机号码输入有误！", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(activity, "手机号码输入有误！", Toast.LENGTH_SHORT).show();
         return false;
     }
 

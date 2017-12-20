@@ -88,6 +88,8 @@
             android:hint="密码"
             android:background="@null"
             android:layout_marginLeft="5dp"
+            android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_"
+            android:inputType="textPassword"
             />
         </LinearLayout>
         <View
@@ -130,6 +132,8 @@
             android:hint="确认密码"
             android:background="@null"
             android:layout_marginLeft="5dp"
+            android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_"
+            android:inputType="textPassword"
             />
     </LinearLayout>
         <View
@@ -161,7 +165,7 @@
             android:textSize="@dimen/font_12sp"
             />
         <EditText
-            android:id="@+id/regist_et_"
+            android:id="@+id/regist_et_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_12sp"

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseActivity;
 import com.xcoinpay.pizza.pizzawallet.presenter.RegistPresenter;
+import com.xcoinpay.pizza.pizzawallet.util.EncryptUtil;
 import com.xcoinpay.pizza.pizzawallet.util.SMSUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -68,27 +69,56 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
     }
 
     private void register() {
-        SMSUtil.judgePhoneNums(this,getPhone());
-        boolean mobileNO = SMSUtil.isMobileNO(getPhone());
-        boolean ispwdNo = TextUtils.isEmpty(getPwd());
-        boolean isRPwd = TextUtils.isEmpty(getRPwd());
-        boolean isCode = TextUtils.isEmpty(getCode());
-
-        if(ispwdNo==isRPwd && mobileNO && !ispwdNo && !isCode){
-            presenter.regist(mobileNO,ispwdNo);
+       //1.判断手机号码和密码是否为空
+        if(TextUtils.isEmpty(getPhone())){
+            Toast.makeText(this, "手机号码不能为空", Toast.LENGTH_SHORT).show();
+            return;
         }
+        if(TextUtils.isEmpty(getPwd())){
+            Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(getRPwd())){
+            Toast.makeText(this, "确认密码不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(!getPwd().equals(getRPwd())){
+            Toast.makeText(this, "两次密码不一致", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(getCode())){
+            Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //判断手机号码的合法性
+        boolean isPhone = SMSUtil.judgePhoneNums(this, getPhone());
+        if(!isPhone){
+            Toast.makeText(this, "手机号码不合法", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //对密码进行加密加盐
+        String salt = "pizzawallet";
+        String saltpwd = EncryptUtil.shaEncrypt(getPwd()+salt);
+        presenter.regist(getPhone(),saltpwd);
     }
 
     //判断电话号码的合法性
     private void phoneCrrect() {
+        //发送验证码以前判断一下手机号码
+       if(TextUtils.isEmpty(getPhone())){
+           Toast.makeText(this, "手机号码不能为空", Toast.LENGTH_SHORT).show();
+           return;
+       }
         boolean isPhone = SMSUtil.judgePhoneNums(this, getPhone());
-        if(isPhone){
-            initCountDown();
-            Toast.makeText(this,"验证码已发送",Toast.LENGTH_SHORT).show();
+       //判断手机号码是否合法
+        if(!isPhone){
+            Toast.makeText(this, "手机号码不合法", Toast.LENGTH_SHORT).show();
+            return;
         }
-// else{
-//            Toast.makeText(this,"输入的电话号码有误",Toast.LENGTH_SHORT);
-//        }
+        presenter.sendCode(getPhone());
+        Toast.makeText(this, "验证码已发送", Toast.LENGTH_SHORT).show();
+        initCountDown();
+
 
     }
 

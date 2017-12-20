@@ -10,8 +10,12 @@ import com.xcoinpay.pizza.pizzawallet.base.BasePresenter;
 
 public class RegistPresenter extends BasePresenter {
 
-    public void regist(boolean mobileNO, boolean pwdNo) {
-//        Toast.makeText(this,)
+    public void regist(String mobileNO, String pwdNo) {
+
+    }
+
+    public void sendCode(String phone) {
+
     }
 }
 
