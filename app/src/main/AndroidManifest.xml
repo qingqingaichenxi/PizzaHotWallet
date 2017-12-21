@@ -30,7 +30,10 @@
         <activity android:name=".view.TestScanActivity" />
         <activity android:name=".view.TradeBookActivity" />
         <activity android:name=".view.RegistActivity" />
-        <activity android:name=".view.ForgetActivity"></activity>
+        <activity android:name=".view.ForgetActivity" />
+        <activity android:name=".view.NewPwdActivity" />
+        <activity android:name=".view.AboutActivity" />
+        <activity android:name=".view.TokenActivity"></activity>
     </application>
 
 </manifest>

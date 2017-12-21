@@ -35,6 +35,8 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
     TextView sendeCode;
     @BindView(R.id.regist_et_code)
     EditText mCode;
+    @BindView(R.id.user_name)
+    EditText user_name;
     @BindView(R.id.regist)
     Button regist;
 
@@ -98,6 +100,10 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
             Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
+        if(TextUtils.isEmpty(getName())){
+            Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //判断手机号码的合法性
         boolean isPhone = SMSUtil.judgePhoneNums(this, getPhone());
         if(!isPhone){
@@ -107,7 +113,7 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
         //对密码进行加密加盐
         String salt = "pizzawallet";
         String saltpwd = EncryptUtil.shaEncrypt(getPwd()+salt);
-        presenter.regist(getPhone(),saltpwd);
+        presenter.regist(getName(),getPhone(),saltpwd);
     }
 
     //判断电话号码的合法性
@@ -165,6 +171,9 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
     }
     public String getRPwd(){
         return mRPwd.getText().toString().trim();
+    }
+    public String getName(){
+        return user_name.getText().toString().trim();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

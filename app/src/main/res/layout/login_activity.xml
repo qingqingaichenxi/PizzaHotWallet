@@ -9,13 +9,57 @@ android:background="#EDEDEB"
     android:padding="30dp"
 >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:layout_marginTop="30dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/mine" />
+            <EditText
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="用户名"
+                android:background="@null"
+                android:layout_marginLeft="5dp"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="5dp"/>
+        <!--<TextView-->
+        <!--android:visibility="invisible"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="获取验证码"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:textSize="15sp"-->
+        <!--android:background="#3090E6"-->
+        <!--android:padding="8dp"-->
+        <!--android:layout_marginRight="8dp"/>-->
+    </LinearLayout>
+
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center_vertical"
-    android:layout_marginTop="30dp">
+    android:layout_marginTop="10dp">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -37,13 +81,13 @@ android:background="#EDEDEB"
         android:layout_marginLeft="5dp"
         android:digits="0123456789qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM_"
         />
-        <ImageView
-            android:id="@+id/iv_clearphone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/home"
-            android:clickable="true"
-            />
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_clearphone"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@mipmap/home"-->
+            <!--android:clickable="true"-->
+            <!--/>-->
     </LinearLayout>
 
     <View

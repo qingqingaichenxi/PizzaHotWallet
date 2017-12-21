@@ -29,6 +29,29 @@
             />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ll_token"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="激活以太Token"
+            android:layout_marginLeft="10dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_update"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,6 +72,7 @@
             />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ll_about"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,7 +90,9 @@
             android:text="关于"
             android:layout_marginLeft="10dp"
             />
+
     </LinearLayout>
+
 
 
 </LinearLayout>

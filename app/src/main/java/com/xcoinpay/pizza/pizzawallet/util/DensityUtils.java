@@ -5,7 +5,7 @@ import android.util.TypedValue;
 
 /**
  * 类描述：常用单位转换的辅助类 dp sp px
- * 创建人：yekh
+ * 创建人：llq
  * 创建时间：2016/7/6 14:57
  */
 public class DensityUtils {

@@ -10,7 +10,7 @@ import com.xcoinpay.pizza.pizzawallet.base.BasePresenter;
 
 public class RegistPresenter extends BasePresenter {
 
-    public void regist(String mobileNO, String pwdNo) {
+    public void regist(String name, String mobileNO, String pwdNo) {
 
     }
 

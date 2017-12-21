@@ -14,4 +14,7 @@
     <string name="yes">确定</string>
     <string name="login">登录</string>
 
+    <string name="commit">提交</string>
+    <string name="regist">注册</string>
+
 </resources>

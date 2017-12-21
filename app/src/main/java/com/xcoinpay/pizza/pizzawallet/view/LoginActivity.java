@@ -40,8 +40,9 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
     EditText user_phone;
     @BindView(R.id.user_pswd)
     EditText user_pswd;
-    @BindView(R.id.iv_clearphone)
-    ImageView clearphone;
+    @BindView(R.id.user_name)
+    EditText user_name;
+
     @BindView(R.id.iv_clearpwd)
     ImageView clearpwd;
 
@@ -81,7 +82,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
         }
     }
 
-    @OnClick({R.id.login_tv_regist,R.id.login_tv_forgetpwd,R.id.loagin,R.id.iv_clearphone,R.id.iv_clearpwd})
+    @OnClick({R.id.login_tv_regist,R.id.login_tv_forgetpwd,R.id.loagin,R.id.iv_clearpwd})
     public void click(View view){
         switch (view.getId()){
             case R.id.login_tv_regist:
@@ -93,9 +94,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
             case R.id.loagin:
                 login();
                 break;
-            case R.id.iv_clearphone:
-                user_phone.setText("");
-                break;
+
             case R.id.iv_clearpwd:
                 user_pswd.setText("");
                 break;
@@ -118,6 +117,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
             Toast.makeText(this,"密码不能少于六位",Toast.LENGTH_SHORT).show();
             return;
         }
+        if(TextUtils.isEmpty(getName())){
+            Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //2.校验手机号码是否合法
         boolean isPhoneOk = SMSUtil.judgePhoneNums(this, getPhone());
 
@@ -129,7 +132,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
         String salt = "pizzawallet";
         String saltpwd = EncryptUtil.shaEncrypt(getPwd() + salt);
 
-        presenter.login(getPhone(),saltpwd);
+        presenter.login(getName(),getPhone(),saltpwd);
 
     }
 
@@ -141,4 +144,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
 
         return  user_pswd.getText().toString().trim();
     }
+    public String getName(){
+        return user_name.getText().toString().trim();
+    }
+
 }

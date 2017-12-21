@@ -9,7 +9,6 @@
     android:padding="30dp"
     >
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,16 +25,17 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/mine"
                 />
-        <EditText
-            android:id="@+id/forget_user_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="手机号"
-            android:digits="0123456789"
-            android:layout_marginLeft="@dimen/p_5dp"
-            />
-            </LinearLayout>
+            <EditText
+                android:id="@+id/new_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="设置密码"
+                android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_"
+                android:layout_marginLeft="@dimen/p_5dp"
+                android:inputType="textPassword"
+                />
+        </LinearLayout>
 
 
         <View
@@ -54,55 +54,42 @@
         <!--android:padding="8dp"-->
         <!--android:layout_marginRight="8dp"/>-->
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_vertical"
         android:padding="5dp"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="30dp">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="horizontal"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/mine"
+                />
+            <EditText
+                android:id="@+id/reset_pwd"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/mine"
-                    />
-        <EditText
-            android:id="@+id/user_code"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:hint="验证码"
-            android:background="@null"
-            android:layout_marginLeft="@dimen/p_5dp"
-            />
-        <TextView
-            android:id="@+id/tv_getcode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="获取验证码"
-            android:textSize="@dimen/font_12sp"
-            android:textColor="@color/colorPrimary"
-            android:clickable="true"
-            />
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="确认密码"
+                android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_"
+                android:layout_marginLeft="@dimen/p_5dp"
+                android:inputType="textPassword"
+                />
         </LinearLayout>
-            </LinearLayout>
+
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@android:color/darker_gray"
             android:layout_marginTop="5dp"/>
-        <!--<TextView-->
-        <!--android:visibility="invisible"-->
+        <!--<Button-->
+        <!--android:id="@+id/user_getyanzheng"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:text="获取验证码"-->
@@ -112,16 +99,8 @@
         <!--android:padding="8dp"-->
         <!--android:layout_marginRight="8dp"/>-->
     </LinearLayout>
-    <!--<EditText-->
-    <!--android:id="@+id/user_yanzheng"-->
-    <!--android:layout_width="100dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginLeft="10dp"-->
-    <!--android:hint="验证码"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--/>-->
     <Button
-        android:id="@+id/forget_commit"
+        android:id="@+id/commit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/commit"
@@ -136,6 +115,4 @@
         android:layout_marginTop="35dp"
         />
 
-
 </LinearLayout>
-
