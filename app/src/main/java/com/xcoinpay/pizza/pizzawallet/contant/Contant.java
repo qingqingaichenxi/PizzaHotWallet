@@ -6,7 +6,14 @@ package com.xcoinpay.pizza.pizzawallet.contant;
 
 public class Contant {
 
-    public static final String isLogin = "is_login";
-    public static final String username = "username";
-    public static final String userpwd = "userpwd";
+    //接口
+    public static final String BASEURL = "http://192.168.0.110:8080/";
+
+
+
+
+
+    public static final String ISLOGIN = "is_login";
+    public static final String USERNAME = "username";
+    public static final String USERPWD = "userpwd";
 }

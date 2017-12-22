@@ -15,7 +15,9 @@ import android.widget.Toast;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseActivity;
+import com.xcoinpay.pizza.pizzawallet.bean.BaseResponse;
 import com.xcoinpay.pizza.pizzawallet.bean.Event;
+import com.xcoinpay.pizza.pizzawallet.bean.User;
 import com.xcoinpay.pizza.pizzawallet.contant.Contant;
 import com.xcoinpay.pizza.pizzawallet.presenter.LoginPresenter;
 import com.xcoinpay.pizza.pizzawallet.util.EncryptUtil;
@@ -40,8 +42,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
     EditText user_phone;
     @BindView(R.id.user_pswd)
     EditText user_pswd;
-    @BindView(R.id.user_name)
-    EditText user_name;
+//    @BindView(R.id.user_name)
+//    EditText user_name;
 
     @BindView(R.id.iv_clearpwd)
     ImageView clearpwd;
@@ -70,15 +72,25 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
 //接受传递过来的数据
     @Subscribe(threadMode = ThreadMode.MAIN)
     public  void onEvent(Event event){
+
+
         switch (event.code){
-            case 1:
+            case "200":
+                User user = (User) event.data;
+                startActivity(new Intent(this,MainActivity.class));
+
                 Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
                 //把返回的用户信息和token保存到本地
                 break;
-            case 2:
-                Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
+            case "2":
 
+                Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
                 break;
+            case "500":
+                BaseResponse.ResponseResult result = (BaseResponse.ResponseResult) event.data;
+                Toast.makeText(this,result.msg, Toast.LENGTH_SHORT).show();
+                break;
+
         }
     }
 
@@ -117,10 +129,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
             Toast.makeText(this,"密码不能少于六位",Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(getName())){
-            Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if(TextUtils.isEmpty(getName())){
+//            Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         //2.校验手机号码是否合法
         boolean isPhoneOk = SMSUtil.judgePhoneNums(this, getPhone());
 
@@ -131,8 +143,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
         //3.对密码进行加密
         String salt = "pizzawallet";
         String saltpwd = EncryptUtil.shaEncrypt(getPwd() + salt);
+        String phone = getPhone();
 
-        presenter.login(getName(),getPhone(),saltpwd);
+
+        presenter.login(phone,saltpwd);
+
+
 
     }
 
@@ -144,8 +160,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
 
         return  user_pswd.getText().toString().trim();
     }
-    public String getName(){
-        return user_name.getText().toString().trim();
-    }
+//    public String getName(){
+//        return user_name.getText().toString().trim();
+//    }
 
 }

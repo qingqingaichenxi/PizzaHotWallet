@@ -1,5 +1,7 @@
 package com.xcoinpay.pizza.pizzawallet.modle;
 
+import com.xcoinpay.pizza.pizzawallet.contant.Contant;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -9,18 +11,31 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
 
-    public static final  RetrofitHelper retrofitHelper = new RetrofitHelper();
-
-    private void RetrofitHelper(){
-
+    private  ApiService apiService;
+    private static RetrofitHelper retrofitHelper = null;
+    private  RetrofitHelper(){
         Retrofit retrofit = new Retrofit.Builder().
-                baseUrl("xxxxxxx")
+                baseUrl(Contant.BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        retrofit.create(ApiService.class);
+
+        apiService = retrofit.create(ApiService.class);
     }
 
-    public RetrofitHelper getInstance(){
+
+
+    public static RetrofitHelper getInstance(){
+        synchronized (RetrofitHelper.class){
+            if(retrofitHelper==null){
+                retrofitHelper = new RetrofitHelper();
+            }
+        }
+
         return retrofitHelper;
+    }
+
+
+    public ApiService getApiService() {
+        return apiService;
     }
 }
