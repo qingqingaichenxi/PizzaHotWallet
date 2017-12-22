@@ -39,11 +39,11 @@ public class TokenActivity extends BaseActivity<TokenPresenter> implements Searc
      */
     private SearchView searchView;
 
-
-    /**
-     * 热搜框列表adapter
-     */
-    private ArrayAdapter<String> hintAdapter;
+//
+//    /**
+//     * 热搜框列表adapter
+//     */
+//    private ArrayAdapter<String> hintAdapter;
 
     /**
      * 自动补全列表adapter
@@ -116,7 +116,7 @@ public class TokenActivity extends BaseActivity<TokenPresenter> implements Searc
         //设置监听
         searchView.setSearchViewListener(this);
         //设置adapter
-        searchView.setTipsHintAdapter(hintAdapter);
+//        searchView.setTipsHintAdapter(hintAdapter);
         searchView.setAutoCompleteAdapter(autoCompleteAdapter);
 
         lvResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -131,7 +131,7 @@ public class TokenActivity extends BaseActivity<TokenPresenter> implements Searc
         //从数据库获取数据
         getDbData();
         //初始化热搜版数据
-        getHintData();
+//        getHintData();
         //初始化自动补全数据
         getAutoCompleteData(null);
         //初始化搜索结果数据
@@ -204,7 +204,7 @@ public class TokenActivity extends BaseActivity<TokenPresenter> implements Searc
         for (int i = 1; i <= hintSize; i++) {
             hintData.add("热搜版" + i + "：Android自定义View");
         }
-        hintAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, hintData);
+//        hintAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, hintData);
     }
 
     /**

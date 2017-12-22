@@ -19,10 +19,12 @@ import java.util.List;
 
 public class SearchAdapter extends BaseAdapter {
 
+    private  TokenActivity tokenActivity;
     public   List<Bean> beans;
 
     public SearchAdapter(TokenActivity tokenActivity, List<Bean> resultData) {
-        beans = resultData;
+        this.beans = resultData;
+        this.tokenActivity = tokenActivity;
 
     }
 
@@ -47,7 +49,7 @@ public class SearchAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if(convertView==null){
             holder = new ViewHolder();
-            convertView= View.inflate(convertView.getContext(), R.layout.item_tiken, null);
+            convertView= View.inflate(tokenActivity, R.layout.item_tiken, null);
             holder.icon = convertView.findViewById(R.id.token_iv);
             holder.name = convertView.findViewById(R.id.token_tv_name);
            holder.name1 =  convertView.findViewById(R.id.token_tv_name1);
