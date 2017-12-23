@@ -3,6 +3,16 @@ package com.xcoinpay.pizza.pizzawallet.presenter;
 import android.widget.Toast;
 
 import com.xcoinpay.pizza.pizzawallet.base.BasePresenter;
+import com.xcoinpay.pizza.pizzawallet.bean.BaseResponse;
+import com.xcoinpay.pizza.pizzawallet.bean.Event;
+import com.xcoinpay.pizza.pizzawallet.bean.User;
+import com.xcoinpay.pizza.pizzawallet.modle.RetrofitHelper;
+
+import org.greenrobot.eventbus.EventBus;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by llq on 2017/12/19 0019.
@@ -10,12 +20,68 @@ import com.xcoinpay.pizza.pizzawallet.base.BasePresenter;
 
 public class RegistPresenter extends BasePresenter {
 
-    public void regist(String name, String mobileNO, String pwdNo) {
+    private Call<BaseResponse<User>> sendCall;
+    private Call<BaseResponse<User>> registCall;
 
+
+    //注册
+    public void regist( String name, String mobileNO, String pwdNo,String code) {
+        registCall = RetrofitHelper.getInstance().getApiService().regist(name, mobileNO, pwdNo, code);
+        registCall.enqueue(new Callback<BaseResponse<User>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {
+                BaseResponse<User> body = response.body();
+               User user =  body.data;
+               BaseResponse.ResponseResult  result = body.getResult();
+               if(result.code=="200"){
+                   EventBus.getDefault().post(new Event(Event.Code.SecondeSuccessCode,user));
+               }
+               else {
+                   EventBus.getDefault().post(new Event(Event.Code.SecondeFailCode,result));
+               }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<User>> call, Throwable t) {
+                EventBus.getDefault().post(new Event(Event.Code.RequestFails,null));
+            }
+        });
     }
 
-    public void sendCode(String phone) {
 
+//发送验证码
+    public void sendCode(String phone, int i) {
+        sendCall = RetrofitHelper.getInstance().getApiService().sendCode(phone, "i");
+        sendCall.enqueue(new Callback<BaseResponse<User>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {
+                BaseResponse<User> body = response.body();
+               User user = body.data;
+                BaseResponse<User>.ResponseResult result = body.getResult();
+                if(result.code=="200"){
+                    EventBus.getDefault().post(new Event(Event.Code.SuccessCode,user));
+                }
+                else {
+                    EventBus.getDefault().post(new Event(Event.Code.FailCode,result));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<User>> call, Throwable t) {
+                    EventBus.getDefault().post(new Event(Event.Code.RequestFail,null));
+            }
+        });
+    }
+
+    @Override
+    public void onDetory() {
+        super.onDetory();
+        if(sendCall!=null){
+            sendCall.cancel();
+        }
+        if (registCall!=null){
+            registCall.cancel();
+        }
     }
 }
 

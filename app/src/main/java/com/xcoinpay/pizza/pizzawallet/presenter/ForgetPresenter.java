@@ -9,10 +9,10 @@ import com.xcoinpay.pizza.pizzawallet.base.BasePresenter;
 public class ForgetPresenter extends BasePresenter {
 
 //发送验证码的方法
-    public void sendCode(String phone) {
+    public void sendCode(String phone, int i) {
     }
 
-    //提交验证码的方法
-    public void commitCode(String phone, String code) {
+    //提忘记密码的方法
+    public void commitCode(String newPwd, String phone, String code) {
     }
 }

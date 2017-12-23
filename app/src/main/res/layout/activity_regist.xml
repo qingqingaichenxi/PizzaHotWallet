@@ -33,8 +33,6 @@
                 android:hint="用户名"
                 android:background="@null"
                 android:layout_marginLeft="5dp"
-                android:digits="0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_"
-                android:inputType="textPassword"
                 android:maxLength="15"
                 />
         </LinearLayout>
@@ -219,6 +217,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_12sp"
             android:textColor="@color/colorPrimary"
+            android:digits="1234567890"
             android:background="@null"
             />
 

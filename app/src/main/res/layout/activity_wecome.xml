@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.xcoinpay.pizza.pizzawallet.view.WecomeActivity">
+    <Button
+        android:id="@+id/wecome_btn_go"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go"
+        android:textColor="@color/write"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="@dimen/padding_12dp"
+        android:paddingRight="@dimen/padding_12dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/padding_60dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/wecome_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

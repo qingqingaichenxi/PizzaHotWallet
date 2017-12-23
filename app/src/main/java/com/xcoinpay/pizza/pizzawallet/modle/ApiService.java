@@ -15,7 +15,21 @@ import retrofit2.http.POST;
 
 public interface ApiService {
 
+    //登录接口的参数
     @FormUrlEncoded
-    @POST("xcoinpay/user/login")
+    @POST("login")
     Call<BaseResponse<User>> login(@Field("tel") String mPhone, @Field("password") String mPwd);
+
+
+
+    //注册页面发送短信的接口参数
+    @FormUrlEncoded
+    @POST("sendMessage")
+    Call<BaseResponse<User>> sendCode(@Field("tel") String mPhone, @Field("mssageType") String mssageType);
+
+    //注册页面注册的接口参数
+    @FormUrlEncoded
+    @POST("register")
+    Call<BaseResponse<User>> regist(@Field("name") String name, @Field("tel") String mPhone,
+                                    @Field("password") String pwd, @Field("code") String code);
 }

@@ -16,5 +16,6 @@
 
     <string name="commit">提交</string>
     <string name="regist">注册</string>
+    <string name="go">立即体验</string>
 
 </resources>

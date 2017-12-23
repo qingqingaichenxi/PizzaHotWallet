@@ -7,7 +7,7 @@ package com.xcoinpay.pizza.pizzawallet.contant;
 public class Contant {
 
     //接口
-    public static final String BASEURL = "http://192.168.0.110:8080/";
+    public static final String BASEURL = "http://192.168.0.110:8080/xcoinpay/user/";
 
 
 

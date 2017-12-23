@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseActivity;
+import com.xcoinpay.pizza.pizzawallet.bean.BaseResponse;
+import com.xcoinpay.pizza.pizzawallet.bean.Event;
+import com.xcoinpay.pizza.pizzawallet.bean.User;
 import com.xcoinpay.pizza.pizzawallet.presenter.RegistPresenter;
 import com.xcoinpay.pizza.pizzawallet.util.EncryptUtil;
 import com.xcoinpay.pizza.pizzawallet.util.SMSUtil;
@@ -61,7 +64,8 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
     public void click(View view){
         switch (view.getId()){
             case R.id.regist_tv_sendecode:
-                phoneCrrect();
+                //发送短信验证码
+                sendeCode();
 
                 break;
             case R.id.regist:
@@ -71,6 +75,11 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
     }
 
     private void register() {
+        //用户名不能为空
+        if(TextUtils.isEmpty(getName())){
+            Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
        //1.判断手机号码和密码是否为空
         if(TextUtils.isEmpty(getPhone())){
             Toast.makeText(this, "手机号码不能为空", Toast.LENGTH_SHORT).show();
@@ -100,10 +109,7 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
             Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(TextUtils.isEmpty(getName())){
-            Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
         //判断手机号码的合法性
         boolean isPhone = SMSUtil.judgePhoneNums(this, getPhone());
         if(!isPhone){
@@ -113,11 +119,12 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
         //对密码进行加密加盐
         String salt = "pizzawallet";
         String saltpwd = EncryptUtil.shaEncrypt(getPwd()+salt);
-        presenter.regist(getName(),getPhone(),saltpwd);
+//        presenter.regist(getName(),getPhone(),saltpwd,getCode());
+        Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
     }
 
     //判断电话号码的合法性
-    private void phoneCrrect() {
+    private void sendeCode() {
         //发送验证码以前判断一下手机号码
        if(TextUtils.isEmpty(getPhone())){
            Toast.makeText(this, "手机号码不能为空", Toast.LENGTH_SHORT).show();
@@ -129,7 +136,8 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
             Toast.makeText(this, "手机号码不合法", Toast.LENGTH_SHORT).show();
             return;
         }
-        presenter.sendCode(getPhone());
+        //发送短信验证码的方式有两种，0：注册时   1：修改时
+//        presenter.sendCode(getPhone(),0);
         Toast.makeText(this, "验证码已发送", Toast.LENGTH_SHORT).show();
         initCountDown();
 
@@ -176,8 +184,43 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
         return user_name.getText().toString().trim();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(String string){
 
+/**
+ * 处理返回来的数据处理
+ * 分两种返回码：一个是请求http 返回的code   一个是返回体中的code
+ * 这两种都在Event这个类中描述
+ *
+ * */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event event){
+        switch (event.code){
+            //发送验证码的判断
+            case "200":
+                User user = (User) event.data;
+                Toast.makeText(this, "发送验证码成功", Toast.LENGTH_SHORT).show();
+                break;
+            case "500":
+               BaseResponse.ResponseResult result = (BaseResponse.ResponseResult) event.data;
+                Toast.makeText(this,result.getMsg(), Toast.LENGTH_SHORT).show();
+                break;
+            case "2":
+                Toast.makeText(this, "发送验证码失败", Toast.LENGTH_SHORT).show();
+                break;
+
+
+            //注册的判断
+            case "201":
+               User registUser = (User) event.data;
+                Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+                break;
+            case "501":
+              BaseResponse.ResponseResult registResult = (BaseResponse.ResponseResult) event.data;
+                Toast.makeText(this,registResult.getMsg(), Toast.LENGTH_SHORT).show();
+                break;
+            case "3":
+                Toast.makeText(this, "注册失败", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
     }
 }

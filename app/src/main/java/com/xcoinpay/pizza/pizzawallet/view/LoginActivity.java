@@ -48,7 +48,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
     @BindView(R.id.iv_clearpwd)
     ImageView clearpwd;
 
-
+    private static final  String USER_NAEM = null;
+    private static final String USER_TEL = null;
 
 
     @Override
@@ -76,7 +77,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
 
         switch (event.code){
             case "200":
+                //保存数据SP中
                 User user = (User) event.data;
+                SPUtils.putString(this, USER_NAEM,user.getName());
+                SPUtils.putString(this, USER_TEL,user.getTel());
+//                SPUtils.putString(this,)
                 startActivity(new Intent(this,MainActivity.class));
 
                 Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
