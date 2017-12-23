@@ -1,8 +1,6 @@
 package com.xcoinpay.pizza.pizzawallet.view;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,7 +21,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
+
 
 public class TokenActivity extends BaseActivity<TokenPresenter> implements SearchView.SearchViewListener {
 

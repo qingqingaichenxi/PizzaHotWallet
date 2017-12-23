@@ -47,6 +47,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> {
 
     @Override
     public void init() {
+        toolbar_left_iv.setVisibility(View.GONE);
         toolbar_title.setText("首页");
     }
 

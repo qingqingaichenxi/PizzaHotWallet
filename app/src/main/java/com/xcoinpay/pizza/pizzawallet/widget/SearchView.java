@@ -89,7 +89,7 @@ public class SearchView extends LinearLayout implements View.OnClickListener {
     private void initViews() {
         etInput = (EditText) findViewById(R.id.search_et_input);
         ivDelete = (ImageView) findViewById(R.id.search_iv_delete);
-        lvTips = (ListView) findViewById(R.id.search_lv_tips);
+//        lvTips = (ListView) findViewById(R.id.search_lv_tips);
 
         lvTips.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
