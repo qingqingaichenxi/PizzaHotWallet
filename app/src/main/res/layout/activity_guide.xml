@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.xcoinpay.pizza.pizzawallet.view.WecomeActivity">
+    tools:context="com.xcoinpay.pizza.pizzawallet.view.GuideActivity">
     <Button
         android:id="@+id/wecome_btn_go"
         android:layout_width="wrap_content"

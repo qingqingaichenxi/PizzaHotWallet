@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WecomeActivity extends AppCompatActivity {
+public class GuideActivity extends AppCompatActivity {
 
 
     @BindView(R.id.wecome_btn_go)
@@ -34,7 +34,7 @@ public class WecomeActivity extends AppCompatActivity {
     @BindView(R.id.guide_point)
     View viewPoint;
 
-    String IS_FIRST_GOIN = "is_first_goin";
+    public  static  final String IS_APP_FIRST_OPEN = "is_app_first_open";
 
     int[] pic = new int[]{R.mipmap.girlb,R.mipmap.girla,R.mipmap.girlc,R.mipmap.girld};
     ArrayList<ImageView> imgs = new ArrayList<>();
@@ -43,7 +43,7 @@ public class WecomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wecome);
+        setContentView(R.layout.activity_guide);
         ButterKnife.bind(this);
 
         initImgeView();
@@ -124,19 +124,10 @@ public class WecomeActivity extends AppCompatActivity {
 
     @OnClick(R.id.wecome_btn_go)
     public void click(View view){
-
-
-//        SPUtils.putBoolean(this,IS_FIRST_GOIN,false);
-        boolean is_first = SPUtils.getBoolean(this, IS_FIRST_GOIN, true);
-        if(is_first){
-            SPUtils.putBoolean(this,IS_FIRST_GOIN,false);
-            finish();
-
-        }
-        else {
             startActivity(new Intent(this,MainActivity.class));
             finish();
+            SPUtils.putBoolean(this,IS_APP_FIRST_OPEN,false);
 
-        }
+
     }
 }

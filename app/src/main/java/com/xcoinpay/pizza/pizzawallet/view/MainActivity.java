@@ -1,5 +1,6 @@
 package com.xcoinpay.pizza.pizzawallet.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.xcoinpay.pizza.pizzawallet.R;
+import com.xcoinpay.pizza.pizzawallet.util.SPUtils;
 import com.xcoinpay.pizza.pizzawallet.view.fragment.HomeFragment;
 import com.xcoinpay.pizza.pizzawallet.view.fragment.MyFragment;
 import com.xcoinpay.pizza.pizzawallet.widget.TabButton;
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static int REQUEST_CODE = 1;
 
+    String IS_FIRST_GOIN = "is_first_goin";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
         initFragment();
         initEvent();
         change(0);
+
+//        boolean isFirst = SPUtils.getBoolean(this, IS_FIRST_GOIN, true);
+//        if(isFirst){
+//            startActivity(new Intent(this,GuideActivity.class));
+//        }
+
     }
 
 
