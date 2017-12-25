@@ -36,12 +36,13 @@ public class LoginPresenter extends BasePresenter {
                 BaseResponse<User> body = response.body();
                 User  user =  body.data;
                 BaseResponse<User>.ResponseResult result = body.getResult();
-                if(result.code=="200"){
-                    EventBus.getDefault().post(new Event(Event.Code.RequestSuccess,user));
+
+                if(result.code.equals("200")){
+                    EventBus.getDefault().post(new Event(Event.Code.SuccessCode,user,result));
                 }
                 else {
                     Log.i("返回的结果数据",result.code);
-                    EventBus.getDefault().post(new Event(Event.Code.FailCode,result));
+                    EventBus.getDefault().post(new Event(Event.Code.FailCode,result,null));
                 }
 
 
@@ -53,7 +54,7 @@ public class LoginPresenter extends BasePresenter {
                 String message = t.getMessage();
                 String s = t.toString();
                 //请求失败,通知用户
-                EventBus.getDefault().post(new Event(Event.Code.RequestFail,null));
+                EventBus.getDefault().post(new Event(Event.Code.RequestFail,null,null));
             }
         });
     }

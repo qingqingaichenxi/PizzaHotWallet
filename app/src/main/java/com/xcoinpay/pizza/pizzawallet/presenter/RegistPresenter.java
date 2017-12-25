@@ -33,17 +33,17 @@ public class RegistPresenter extends BasePresenter {
                 BaseResponse<User> body = response.body();
                User user =  body.data;
                BaseResponse.ResponseResult  result = body.getResult();
-               if(result.code=="200"){
-                   EventBus.getDefault().post(new Event(Event.Code.SecondeSuccessCode,user));
+               if(result.code.equals("200")){
+                   EventBus.getDefault().post(new Event(Event.Code.registSuccessCode,user,result));
                }
                else {
-                   EventBus.getDefault().post(new Event(Event.Code.SecondeFailCode,result));
+                   EventBus.getDefault().post(new Event(Event.Code.registFailCode,result,null));
                }
             }
 
             @Override
             public void onFailure(Call<BaseResponse<User>> call, Throwable t) {
-                EventBus.getDefault().post(new Event(Event.Code.RequestFails,null));
+                EventBus.getDefault().post(new Event(Event.Code.RequestFailRegistCode,null,null));
             }
         });
     }
@@ -51,24 +51,24 @@ public class RegistPresenter extends BasePresenter {
 
 //发送验证码
     public void sendCode(String phone, int i) {
-        sendCall = RetrofitHelper.getInstance().getApiService().sendCode(phone, "i");
+        sendCall = RetrofitHelper.getInstance().getApiService().sendCode(phone, i);
         sendCall.enqueue(new Callback<BaseResponse<User>>() {
             @Override
             public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {
                 BaseResponse<User> body = response.body();
                User user = body.data;
                 BaseResponse<User>.ResponseResult result = body.getResult();
-                if(result.code=="200"){
-                    EventBus.getDefault().post(new Event(Event.Code.SuccessCode,user));
+                if(result.code.equals("200")){
+                    EventBus.getDefault().post(new Event(Event.Code.SecondeRegistSuccessCode,user,result));
                 }
                 else {
-                    EventBus.getDefault().post(new Event(Event.Code.FailCode,result));
+                    EventBus.getDefault().post(new Event(Event.Code.SecondeRegistFailCode,result,null));
                 }
             }
 
             @Override
             public void onFailure(Call<BaseResponse<User>> call, Throwable t) {
-                    EventBus.getDefault().post(new Event(Event.Code.RequestFail,null));
+                    EventBus.getDefault().post(new Event(Event.Code.RequestFailsendRegistCode,null,null));
             }
         });
     }

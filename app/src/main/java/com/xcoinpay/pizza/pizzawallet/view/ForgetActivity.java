@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseActivity;
+import com.xcoinpay.pizza.pizzawallet.bean.BaseResponse;
+import com.xcoinpay.pizza.pizzawallet.bean.Event;
+import com.xcoinpay.pizza.pizzawallet.bean.User;
 import com.xcoinpay.pizza.pizzawallet.presenter.ForgetPresenter;
 import com.xcoinpay.pizza.pizzawallet.util.EncryptUtil;
 import com.xcoinpay.pizza.pizzawallet.util.SMSUtil;
@@ -55,10 +58,7 @@ public class ForgetActivity extends BaseActivity<ForgetPresenter> {
         return R.layout.activity_forget;
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(String string){
 
-    }
 
     @OnClick({R.id.tv_getcode,R.id.forget_commit})
     public void click(View view){
@@ -113,8 +113,7 @@ public class ForgetActivity extends BaseActivity<ForgetPresenter> {
                 //调用后台的提交密码的借口（把密码提交给后台）
 
                 presenter.commitCode(saltPwd,getPhone(),getCode());
-                Toast.makeText(this, "提交成功", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(this,NewPwdActivity.class));
+                Toast.makeText(this, "修改密码已提交", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -134,7 +133,7 @@ public class ForgetActivity extends BaseActivity<ForgetPresenter> {
 
         //把手机号和验证码发送给后台
         presenter.sendCode(getPhone(),1);
-        Toast.makeText(this, "验证码发送成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "验证码已发送", Toast.LENGTH_SHORT).show();
         initCountDown();
     }
 
@@ -174,5 +173,46 @@ public class ForgetActivity extends BaseActivity<ForgetPresenter> {
     }
     public String getResetPed(){
         return reset_pwd.getText().toString().trim();
+    }
+
+
+//接受和处理请求回来的数据
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event event){
+
+
+        //发送验证码的返回数据
+        switch (event.code){
+            //成功的数据
+            case "201":
+                User user  = (User) event.data;
+                BaseResponse.ResponseResult coderesult = (BaseResponse.ResponseResult) event.resultData;
+                Toast.makeText(this,coderesult.getMsg(), Toast.LENGTH_SHORT).show();
+                break;
+                //失败的数据
+            case "501":
+               BaseResponse.ResponseResult result = (BaseResponse.ResponseResult) event.data;
+                Toast.makeText(this,result.getMsg(), Toast.LENGTH_SHORT).show();
+                break;
+                //请求服务器失败
+            case "3":
+                Toast.makeText(this, "请求连接服务器超时", Toast.LENGTH_SHORT).show();
+                break;
+
+            //忘记更改密码的返回数据
+            case "202":
+               User forgetUser = (User) event.data;
+               BaseResponse.ResponseResult forgetData = (BaseResponse.ResponseResult) event.resultData;
+                Toast.makeText(this, forgetData.getMsg(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(ForgetActivity.this,LoginActivity.class));
+                break;
+            case "502":
+              BaseResponse.ResponseResult forgetResult = (BaseResponse.ResponseResult) event.data;
+                Toast.makeText(this, forgetResult.getMsg(), Toast.LENGTH_SHORT).show();
+                break;
+            case "4":
+                Toast.makeText(this, "连接服务器超时，更改密码失败", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }

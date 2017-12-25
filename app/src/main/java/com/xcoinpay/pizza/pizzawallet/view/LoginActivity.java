@@ -79,19 +79,22 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
             case "200":
                 //保存数据SP中
                 User user = (User) event.data;
-                SPUtils.putString(this, USER_NAEM,user.getName());
-                SPUtils.putString(this, USER_TEL,user.getTel());
-//                SPUtils.putString(this,)
-                startActivity(new Intent(this,MainActivity.class));
+                BaseResponse.ResponseResult  resultData = (BaseResponse.ResponseResult) event.resultData;
 
-                Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+//                SPUtils.putString(this, USER_NAEM,user.getName());
+//                SPUtils.putString(this, USER_TEL,user.getTel());
+//                SPUtils.putString(this,)
+                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+
+                Toast.makeText(this, resultData.getMsg(), Toast.LENGTH_SHORT).show();
                 //把返回的用户信息和token保存到本地
                 break;
             case "2":
 
-                Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "连接服务器失败登录失败", Toast.LENGTH_SHORT).show();
                 break;
             case "500":
+
                 BaseResponse.ResponseResult result = (BaseResponse.ResponseResult) event.data;
                 Toast.makeText(this,result.msg, Toast.LENGTH_SHORT).show();
                 break;
@@ -149,11 +152,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
         String salt = "pizzawallet";
         String saltpwd = EncryptUtil.shaEncrypt(getPwd() + salt);
         String phone = getPhone();
-
-
         presenter.login(phone,saltpwd);
-
-
 
     }
 
@@ -165,8 +164,5 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
 
         return  user_pswd.getText().toString().trim();
     }
-//    public String getName(){
-//        return user_name.getText().toString().trim();
-//    }
 
 }

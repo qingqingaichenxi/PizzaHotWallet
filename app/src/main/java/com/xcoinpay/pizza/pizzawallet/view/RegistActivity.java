@@ -119,8 +119,8 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
         //对密码进行加密加盐
         String salt = "pizzawallet";
         String saltpwd = EncryptUtil.shaEncrypt(getPwd()+salt);
-//        presenter.regist(getName(),getPhone(),saltpwd,getCode());
-        Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+        presenter.regist(getName(),getPhone(),saltpwd,getCode());
+
     }
 
     //判断电话号码的合法性
@@ -137,7 +137,7 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
             return;
         }
         //发送短信验证码的方式有两种，0：注册时   1：修改时
-//        presenter.sendCode(getPhone(),0);
+        presenter.sendCode(getPhone(),0);
         Toast.makeText(this, "验证码已发送", Toast.LENGTH_SHORT).show();
         initCountDown();
 
@@ -195,30 +195,33 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
     public void onEvent(Event event){
         switch (event.code){
             //发送验证码的判断
-            case "200":
+            case "204":
                 User user = (User) event.data;
-                Toast.makeText(this, "发送验证码成功", Toast.LENGTH_SHORT).show();
+                BaseResponse.ResponseResult resultData = (BaseResponse.ResponseResult) event.resultData;
+                Toast.makeText(this, resultData.getMsg(), Toast.LENGTH_SHORT).show();
                 break;
-            case "500":
+            case "504":
                BaseResponse.ResponseResult result = (BaseResponse.ResponseResult) event.data;
                 Toast.makeText(this,result.getMsg(), Toast.LENGTH_SHORT).show();
                 break;
-            case "2":
+            case "6":
                 Toast.makeText(this, "发送验证码失败", Toast.LENGTH_SHORT).show();
                 break;
 
 
             //注册的判断
-            case "201":
+            case "203":
                User registUser = (User) event.data;
-                Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+                BaseResponse.ResponseResult registresultData = (BaseResponse.ResponseResult) event.resultData;
+                Toast.makeText(this,registresultData.getMsg(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(RegistActivity.this,LoginActivity.class));
                 break;
-            case "501":
+            case "503":
               BaseResponse.ResponseResult registResult = (BaseResponse.ResponseResult) event.data;
                 Toast.makeText(this,registResult.getMsg(), Toast.LENGTH_SHORT).show();
                 break;
-            case "3":
-                Toast.makeText(this, "注册失败", Toast.LENGTH_SHORT).show();
+            case "5":
+                Toast.makeText(this, "请求连接服务器超时，注册失败", Toast.LENGTH_SHORT).show();
                 break;
 
         }

@@ -25,11 +25,22 @@ public interface ApiService {
     //注册页面发送短信的接口参数
     @FormUrlEncoded
     @POST("sendMessage")
-    Call<BaseResponse<User>> sendCode(@Field("tel") String mPhone, @Field("mssageType") String mssageType);
+    Call<BaseResponse<User>> sendCode(@Field("tel") String mPhone, @Field("mssageType") int mssageType);
 
     //注册页面注册的接口参数
     @FormUrlEncoded
     @POST("register")
     Call<BaseResponse<User>> regist(@Field("name") String name, @Field("tel") String mPhone,
                                     @Field("password") String pwd, @Field("code") String code);
+
+
+    //忘记密码接口的参数（发送短信）
+    @FormUrlEncoded
+    @POST("sendMessage")
+    Call<BaseResponse<User>> forgetSendeCode(@Field("tel") String mPhone, @Field("mssageType") int messageType);
+
+    //忘记密码接口的参数（提交按钮）
+    @FormUrlEncoded
+    @POST("changeLoginPassword")
+    Call<BaseResponse<User>> forgetCommit(@Field("newPassword") String newPassword, @Field("tel") String mPhone, @Field("code") String code);
 }
