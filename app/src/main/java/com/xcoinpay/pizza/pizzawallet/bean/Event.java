@@ -33,6 +33,8 @@ public class Event {
 
 
 
+
+
 /**
  * 注册页面
  *
@@ -44,6 +46,13 @@ public class Event {
         public static final String SecondeRegistSuccessCode = "204";
         public static final String SecondeRegistFailCode = "504";
         public static final String RequestFailRegistCode = "6";
+
+
+        /**
+         * 添加币种地址的页面
+         */
+
+        public static final  String AddAddress = "a";
 
 
         //...

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.xcoinpay.pizza.pizzawallet.R;
+import com.xcoinpay.pizza.pizzawallet.bean.Event;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -64,6 +65,10 @@ public class TestScanActivity extends AppCompatActivity implements QRCodeView.De
         finish();
         EventBus.getDefault().post(result);//巴扫描的结果发送给HOmefragment
 //        mQRCodeView.startSpot();
+
+        //添加币种页面扫描币种二维码，吧地址发送给添加地址页面AddAdressActivity
+        EventBus.getDefault().post(new Event(Event.Code.AddAddress,result,null));
+
     }
 
     @Override
