@@ -40,16 +40,16 @@ public class AddressBookActivity extends BaseActivity<AddressPresenter> {
 
        book_recycleview.setLayoutManager(new LinearLayoutManager(this));
        //设置列表中的数据
-        adapter = new AddBookAdapter(bookInfos);
+        adapter = new AddBookAdapter(this,bookInfos);
         book_recycleview.setAdapter(adapter);
        //点击挑条目
-
-        book_recycleview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(v.getContext(),TransferActivity.class));//跳转到传送二维码页面
-            }
-        });
+//
+//        book_recycleview.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(v.getContext(),TransferActivity.class));//跳转到传送二维码页面
+//            }
+//        });
 
     }
 

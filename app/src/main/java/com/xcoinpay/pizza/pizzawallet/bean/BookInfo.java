@@ -1,10 +1,12 @@
 package com.xcoinpay.pizza.pizzawallet.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by llq on 2017/12/27 0027.
  */
 
-public class BookInfo {
+public class BookInfo implements Serializable{
     private String coin;
     private String name;
     private String address;

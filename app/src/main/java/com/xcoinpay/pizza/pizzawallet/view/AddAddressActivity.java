@@ -94,19 +94,19 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> {
 
     private String  cutAddress(String result) {
         //字符串中是否含只有：这个字符    等于-1表示这个字符串中没有这个字符
-        if(result.indexOf(":")!=-1){
+        if(result.contains(":") && !result.contains("?")){
             int indexStart = result.indexOf(":");
             String address = result.substring(indexStart+1,result.length()-1);
             return address;
         }
 
-        if(result.indexOf(":")!=-1 && result.indexOf("?")!=-1){
+        if(result.contains(":") && result.contains("?")){
             int satrtIndex = result.indexOf(":");
             int endIndex = result.indexOf("?");
-            String address = result.substring(satrtIndex+1, endIndex-1);
+            String address = result.substring(satrtIndex+1, endIndex);
             return address;
         }
-        if(result.indexOf(":")==-1 && result.indexOf("?")==-1){
+        if(!result.contains(":") && !result.contains("?")){
             return  result;
         }
 

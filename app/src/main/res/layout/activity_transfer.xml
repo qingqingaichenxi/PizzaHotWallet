@@ -6,12 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.xcoinpay.pizza.pizzawallet.view.TransferActivity"
-    android:padding="@dimen/padding_10dp">
+    android:padding="@dimen/padding_20dp">
     <TextView
         android:id="@+id/tv_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="addressssssssssssssss"
+        android:textSize="@dimen/text_18sp"
         />
     <TextView
         android:id="@+id/tv_name"
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:text="name"
         android:layout_marginTop="10dp"
+        android:textSize="@dimen/text_16sp"
         />
     <LinearLayout
         android:orientation="vertical"
@@ -31,18 +33,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="请用冷钱包扫描二维码，实现转账"
+        android:textSize="@dimen/padding_20dp"
         />
     <ImageView
+        android:id="@+id/iv_twocode"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_marginTop="@dimen/padding_20dp"/>
+        android:layout_marginTop="@dimen/padding_30dp"/>
 
     <Button
         android:id="@+id/btn_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="完成"
-        android:layout_marginTop="@dimen/padding_20dp"
+        android:layout_marginTop="@dimen/padding_30dp"
         />
     </LinearLayout>
 
