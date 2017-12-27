@@ -1,7 +1,8 @@
 package com.xcoinpay.pizza.pizzawallet.view;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,9 +11,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.xcoinpay.pizza.pizzawallet.R;
-import com.xcoinpay.pizza.pizzawallet.util.SPUtils;
 import com.xcoinpay.pizza.pizzawallet.view.fragment.HomeFragment;
 import com.xcoinpay.pizza.pizzawallet.view.fragment.MyFragment;
+import com.xcoinpay.pizza.pizzawallet.widget.ProgressDialog;
 import com.xcoinpay.pizza.pizzawallet.widget.TabButton;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public static int REQUEST_CODE = 1;
 
     String IS_FIRST_GOIN = "is_first_goin";
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -135,4 +137,22 @@ public class MainActivity extends AppCompatActivity {
 //        super.onActivityResult(requestCode, resultCode, data);
 //    }
 //}
+
+    Handler handler = new Handler();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(progressDialog==null){
+            progressDialog = new ProgressDialog(this,"Loading ... ...");
+            progressDialog.show();
+
+        }
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        },3000);
+    }
 }
