@@ -2,6 +2,7 @@ package com.xcoinpay.pizza.pizzawallet.modle;
 
 
 import com.xcoinpay.pizza.pizzawallet.bean.BaseResponse;
+import com.xcoinpay.pizza.pizzawallet.bean.Coin;
 import com.xcoinpay.pizza.pizzawallet.bean.User;
 
 import retrofit2.Call;
@@ -43,4 +44,17 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("changeLoginPassword")
     Call<BaseResponse<User>> forgetCommit(@Field("newPassword") String newPassword, @Field("tel") String mPhone, @Field("code") String code);
+
+
+    //fragmenthome扫描冷钱包发送数字币的信息，发送给后台
+    @FormUrlEncoded
+    @POST("send")
+    Call<BaseResponse<Coin>> sendCoin(@Field("address") String address);
+
+    @FormUrlEncoded
+    @POST("query")
+    Call<BaseResponse<Coin>> queryCoin(@Field("address") String address);
+
+
+
 }

@@ -46,12 +46,23 @@ public class TransferActivity extends BaseActivity<NothingPresenter> {
 
     @Override
     public void init() {
+
+        //从主页面扫描完得到的结果
+//        Intent intent1 = getIntent();
+//        String result = intent1.getStringExtra("result");
+//        showfragmentData(result);
         Intent intent = getIntent();
         bookInfo = (BookInfo) intent.getSerializableExtra("bookinfo");
 
         setSupToolbar("传送信息"+bookInfo.getCoin(), 0);
         showData();
 
+    }
+
+    private void showfragmentData(String result) {
+        tv_address.setText(result);
+        tv_name.setText(result);
+        iv_twocode.setImageBitmap(QRCodeEncoder.syncEncodeQRCode(result, BGAQRCodeUtil.dp2px(this, 150)));
     }
 
     private void showData() {

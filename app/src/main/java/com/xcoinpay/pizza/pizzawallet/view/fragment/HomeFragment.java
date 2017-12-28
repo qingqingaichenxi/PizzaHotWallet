@@ -10,10 +10,12 @@ import android.widget.Toast;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseFragment;
+import com.xcoinpay.pizza.pizzawallet.bean.Event;
 import com.xcoinpay.pizza.pizzawallet.presenter.HomePresenter;
 import com.xcoinpay.pizza.pizzawallet.view.AddressBookActivity;
 import com.xcoinpay.pizza.pizzawallet.view.TestScanActivity;
 import com.xcoinpay.pizza.pizzawallet.view.TradeBookActivity;
+import com.xcoinpay.pizza.pizzawallet.view.TransferActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -69,19 +71,38 @@ public class HomeFragment extends BaseFragment<HomePresenter> {
                 startActivity(new Intent(getActivity(),TradeBookActivity.class));
                 break;
             case R.id.btn_barcode:
-                Bitmap img = encodeAsBitmap("我爱俊哥@");
+                Bitmap img = encodeAsBitmap("我@俊哥");
                 iv.setImageBitmap(img);
                 break;
         }
     }
 //生成二维码图片的方法
-    private Bitmap encodeAsBitmap(String fsdfgdfgf) {
-        return QRCodeEncoder.syncEncodeQRCode("我爱俊哥@", BGAQRCodeUtil.dp2px(getActivity(), 150));
+    private Bitmap encodeAsBitmap(String string) {
+        return QRCodeEncoder.syncEncodeQRCode(string, BGAQRCodeUtil.dp2px(getActivity(), 150));
     }
 
     //接收扫完码传递过来的数据
     @Subscribe(threadMode = ThreadMode.MAIN)
     public  void onEvent(String result){
         Toast.makeText(getActivity(),"扫描成功"+result,Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), TransferActivity.class);
+        intent.putExtra("result",result);
+        startActivity(intent);
+        sendCoin(result);
+        queryCoin(result);
+    }
+
+    private void queryCoin(String result) {
+//        presnter.queryCoin(result);
+    }
+
+    private void sendCoin(String result) {
+//        presnter.sendCoin(result);
+    }
+
+    //发送完请求返回回来的数据
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Event event){
+
     }
 }

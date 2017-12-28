@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PizzaHotWallet.iml" filepath="$PROJECT_DIR$/PizzaHotWallet.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PizzaWallet.iml" filepath="$PROJECT_DIR$/PizzaWallet.iml" />
       <module fileurl="file://F:\PizzaHotWallet\PizzaWallet.iml" filepath="F:\PizzaHotWallet\PizzaWallet.iml" />
       <module fileurl="file://F:\android\PizzaHotWallet\PizzaWallet.iml" filepath="F:\android\PizzaHotWallet\PizzaWallet.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

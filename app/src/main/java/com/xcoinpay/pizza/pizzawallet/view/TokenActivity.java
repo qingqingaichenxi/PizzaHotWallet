@@ -1,6 +1,7 @@
 package com.xcoinpay.pizza.pizzawallet.view;
 
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -57,7 +58,7 @@ public class TokenActivity extends BaseActivity<TokenPresenter>  {
     @Override
     protected void onRightClick() {
         super.onRightClick();
-//        startActivity(new Intent(this,CommitTokenActivity.class));
+        startActivity(new Intent(this,CommitTokenActivity.class));
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

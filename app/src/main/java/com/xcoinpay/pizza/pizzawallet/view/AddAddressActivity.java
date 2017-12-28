@@ -63,6 +63,7 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> {
                 break;
             case R.id.btn_add:
                 addCoin();
+
                 break;
 
         }
@@ -70,20 +71,28 @@ public class AddAddressActivity extends BaseActivity<AddAddressPresenter> {
 
     private void addCoin() {
         //判断币种是否是空的
-        if(TextUtils.isEmpty(selete_bi.getText().toString())){
+        String coin = selete_bi.getText().toString();
+        String name = addaddress_et_remark.getText().toString();
+        String coinAddress = writeaddress.getText().toString();
+        if(TextUtils.isEmpty(coin)){
             Toast.makeText(this, "请选择币种", Toast.LENGTH_SHORT).show();
             return;
         }
         //判断备注是否是空的
-        if(TextUtils.isEmpty(addaddress_et_remark.getText().toString())){
+        if(TextUtils.isEmpty(name)){
             Toast.makeText(this, "请填写备注", Toast.LENGTH_SHORT).show();
             return;
         }
         //判断地址是否是空的
-        if(TextUtils.isEmpty(writeaddress.getText().toString())){
+        if(TextUtils.isEmpty(coinAddress)){
             Toast.makeText(this, "请填写或者扫描地址", Toast.LENGTH_SHORT).show();
             return;
         }
+        Intent intent = new Intent(this,AddressBookActivity.class);
+        intent.putExtra("coin",coin);
+        intent.putExtra("name",name);
+        intent.putExtra("coinAddress",coinAddress);
+        startActivity(intent);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

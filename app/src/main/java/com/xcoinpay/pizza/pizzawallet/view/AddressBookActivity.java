@@ -38,18 +38,15 @@ public class AddressBookActivity extends BaseActivity<AddressPresenter> {
        setSupToolbar("地址薄",R.mipmap.ic_launcher);
        initBookInfo();
 
-       book_recycleview.setLayoutManager(new LinearLayoutManager(this));
+        Intent intent = getIntent();
+        String coin = intent.getStringExtra("coin");
+        String name = intent.getStringExtra("name");
+        String coinAddress = intent.getStringExtra("coinAddress");
+
+        book_recycleview.setLayoutManager(new LinearLayoutManager(this));
        //设置列表中的数据
         adapter = new AddBookAdapter(this,bookInfos);
         book_recycleview.setAdapter(adapter);
-       //点击挑条目
-//
-//        book_recycleview.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(v.getContext(),TransferActivity.class));//跳转到传送二维码页面
-//            }
-//        });
 
     }
 

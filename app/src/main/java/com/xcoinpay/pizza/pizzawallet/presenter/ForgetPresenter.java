@@ -79,4 +79,15 @@ public class ForgetPresenter extends BasePresenter {
         });
 
     }
+
+    @Override
+    public void onDetory() {
+        super.onDetory();
+        if(sendCodeCall!=null){
+            sendCodeCall.cancel();
+        }
+        if(commitCodeCall!=null){
+            commitCodeCall.cancel();
+        }
+    }
 }
