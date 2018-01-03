@@ -49,7 +49,7 @@ public interface ApiService {
     //fragmenthome扫描冷钱包发送数字币的信息，发送给后台
     @FormUrlEncoded
     @POST("send")
-    Call<BaseResponse<Coin>> sendCoin(@Field("address") String address);
+    Call<BaseResponse<Coin>> sendCoin( @Field("address") String address, @Field("userid") String userid);
 
     @FormUrlEncoded
     @POST("query")

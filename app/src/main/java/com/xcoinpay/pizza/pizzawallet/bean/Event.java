@@ -55,6 +55,11 @@ public class Event {
         public static final  String AddAddress = "a";
 
 
+        public static final  String SendCode = "b";
+
+
+
+
 
         //...
     }

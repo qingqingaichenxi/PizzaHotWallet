@@ -24,7 +24,7 @@ import com.xcoinpay.pizza.pizzawallet.util.DensityUtils;
 
 /**
  * 类描述：TabButton
- * 创建人：yekh
+ * 创建人：llq
  * 创建时间：2016/7/6 14:48
  */
 public class TabButton extends View {

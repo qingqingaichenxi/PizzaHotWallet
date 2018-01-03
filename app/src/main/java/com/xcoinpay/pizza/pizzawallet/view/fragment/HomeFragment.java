@@ -84,21 +84,21 @@ public class HomeFragment extends BaseFragment<HomePresenter> {
     //接收扫完码传递过来的数据
     @Subscribe(threadMode = ThreadMode.MAIN)
     public  void onEvent(String result){
-        Toast.makeText(getActivity(),"扫描成功"+result,Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getActivity(), TransferActivity.class);
-        intent.putExtra("result",result);
-        startActivity(intent);
-        sendCoin(result);
-        queryCoin(result);
+//        Toast.makeText(getActivity(),"扫描成功"+result,Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(getActivity(), TransferActivity.class);
+//        intent.putExtra("result",result);
+//        startActivity(intent);
+//        sendCoin(result);
+//        queryCoin(result);
     }
 
-    private void queryCoin(String result) {
-//        presnter.queryCoin(result);
-    }
-
-    private void sendCoin(String result) {
+//    private void queryCoin(String result) {
+////        presnter.queryCoin(result);
+//    }
+//
+//    private void sendCoin(String result) {
 //        presnter.sendCoin(result);
-    }
+//    }
 
     //发送完请求返回回来的数据
     @Subscribe(threadMode = ThreadMode.MAIN)

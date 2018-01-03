@@ -1,5 +1,6 @@
 package com.xcoinpay.pizza.pizzawallet.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
@@ -68,6 +69,12 @@ public class TestScanActivity extends AppCompatActivity implements QRCodeView.De
 
         //添加币种页面扫描币种二维码，吧地址发送给添加地址页面AddAdressActivity
         EventBus.getDefault().post(new Event(Event.Code.AddAddress,result,null));
+
+        EventBus.getDefault().postSticky(new Event(Event.Code.SendCode,result,null));//发送此信息
+
+
+
+        startActivity(new Intent(this,SendDetailActivity.class));
 
     }
 

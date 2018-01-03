@@ -37,7 +37,8 @@
         <activity android:name=".view.MainActivity" />
         <activity android:name=".view.GuideActivity" />
         <activity android:name=".view.TransferActivity" />
-        <activity android:name=".view.CommitTokenActivity"></activity>
+        <activity android:name=".view.CommitTokenActivity" />
+        <activity android:name=".view.SendDetailActivity"></activity>
     </application>
 
 </manifest>

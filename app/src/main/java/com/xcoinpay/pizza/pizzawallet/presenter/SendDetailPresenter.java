@@ -10,19 +10,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by llq on 2017/12/16 0016.
+ * Created by llq on 2018/1/3 0003.
  */
 
-public class HomePresenter extends BasePresenter {
+public class SendDetailPresenter extends BasePresenter {
+    private Call<BaseResponse<Coin>> sendCoinCall;
 
-
-    private Call<BaseResponse<Coin>> queryCoinCall;
-
-
-    //查询发出的请求
-    public void queryCoin(String result) {
-        queryCoinCall = RetrofitHelper.getInstance().getApiService().queryCoin(result);
-        queryCoinCall.enqueue(new Callback<BaseResponse<Coin>>() {
+    //发送发出的请求
+    public void sendCoin(String address, String userid){
+        sendCoinCall = RetrofitHelper.getInstance().getApiService().sendCoin(address,userid);
+        sendCoinCall.enqueue(new Callback<BaseResponse<Coin>>() {
             @Override
             public void onResponse(Call<BaseResponse<Coin>> call, Response<BaseResponse<Coin>> response) {
 
@@ -38,11 +35,8 @@ public class HomePresenter extends BasePresenter {
     @Override
     public void onDetory() {
         super.onDetory();
-
-        if(queryCoinCall!=null){
-            queryCoinCall.cancel();
+        if(sendCoinCall!=null){
+            sendCoinCall.cancel();
         }
     }
-
-
 }
