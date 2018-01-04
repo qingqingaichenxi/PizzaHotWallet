@@ -137,6 +137,8 @@ public class TransferActivity extends BaseActivity<TransferPresenter> {
 
     }
     public String getString(){
+        //吧数据进行编码才能用二维码出数据，
+
         String string = android.util.Base64.encodeToString((coinId+","+nonce+","+myBalance+","+walletAddress).getBytes(),0);
         return string;
     }
