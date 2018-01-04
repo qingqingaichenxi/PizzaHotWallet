@@ -32,6 +32,7 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
     Button btnSend;
 
     private static final String USER_ID = null;
+    private String result;
 
     @Override
     public SendDetailPresenter getPresnter() {
@@ -54,7 +55,7 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
     public void onEvent(Event event ) {
         switch (event.code){
             case Event.Code.SendCode:
-                String result = (String) event.data;
+                result = (String) event.data;
                 Toast.makeText(this, "扫描成功" + result, Toast.LENGTH_SHORT).show();
 
                 break;
@@ -68,9 +69,9 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
 
     }
 
-    private void sendCoin(String address) {
+    private void sendCoin(String result) {
         String userId = SPUtils.getString(this, USER_ID);
-        presenter.sendCoin(address,userId);
+//        presenter.sendCoin(result,"4028");
     }
 
 
@@ -80,6 +81,9 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
         Intent intent = new Intent(this, TradeBookActivity.class);
         intent.putExtra("result", "0000");
         startActivity(intent);
-//        sendCoin(result);
+
+        sendCoin(result);
     }
+
+
 }

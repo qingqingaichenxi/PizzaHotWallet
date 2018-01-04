@@ -73,8 +73,15 @@ public class TestScanActivity extends AppCompatActivity implements QRCodeView.De
         EventBus.getDefault().postSticky(new Event(Event.Code.SendCode,result,null));//发送此信息
 
 
+if(result.startsWith("BALANCE:")){
+    Intent intent = new Intent(this,TransferActivity.class);
 
-        startActivity(new Intent(this,SendDetailActivity.class));
+    intent.putExtra("result",result);
+    startActivity(intent);
+
+}else {
+    startActivity(new Intent(this, SendDetailActivity.class));
+}
 
     }
 

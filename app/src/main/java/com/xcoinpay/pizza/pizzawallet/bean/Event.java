@@ -48,6 +48,23 @@ public class Event {
         public static final String RequestFailRegistCode = "6";
 
 
+
+        /**
+         * 发送交易码
+         * */
+
+        public static final String SuccessSendDtailCode = "205";
+        public static final String FailSendDtailCode = "505";
+        public static final String RequestFailsendDetailRegistCode = "7";
+
+        /**
+         * 查询余额码
+         * */
+
+        public static final String QuerySuccessCode = "206";
+        public static final String QueryFailCode = "506";
+        public static final String RequestQueryFailCode = "8";
+
         /**
          * 添加币种地址的页面
          */

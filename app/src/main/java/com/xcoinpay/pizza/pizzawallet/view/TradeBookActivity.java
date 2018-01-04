@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.adapter.TradeBookAdapter;
 import com.xcoinpay.pizza.pizzawallet.base.BaseActivity;
+import com.xcoinpay.pizza.pizzawallet.bean.BaseResponse;
+import com.xcoinpay.pizza.pizzawallet.bean.Coin;
 import com.xcoinpay.pizza.pizzawallet.bean.Event;
 import com.xcoinpay.pizza.pizzawallet.presenter.TradePresenter;
 
@@ -45,7 +48,18 @@ public class TradeBookActivity extends BaseActivity<TradePresenter> {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void event(Event event) {
+        switch (event.code){
+            case Event.Code.SuccessSendDtailCode:
+                Coin  coin = (Coin) event.data;
+                String id = coin.getHexId();
+                BaseResponse.ResponseResult resultData = (BaseResponse.ResponseResult) event.resultData;
+                Toast.makeText(this, resultData.getMsg(), Toast.LENGTH_SHORT).show();
+                break;
+            case Event.Code.FailSendDtailCode:
+                Toast.makeText(this, "连接服务失败", Toast.LENGTH_SHORT).show();
+                break;
 
+        }
     }
 
 

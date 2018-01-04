@@ -14,14 +14,27 @@
         android:text="addressssssssssssssss"
         android:textSize="@dimen/text_18sp"
         />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fdf"
+            />
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="name"
-        android:layout_marginTop="10dp"
         android:textSize="@dimen/text_16sp"
+        android:layout_marginLeft="@dimen/padding_10dp"
         />
+    </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -32,7 +45,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="请用冷钱包扫描二维码，实现转账"
+        android:text="请用冷钱包扫描二维码,查询余额"
         android:textSize="@dimen/padding_20dp"
         />
     <ImageView

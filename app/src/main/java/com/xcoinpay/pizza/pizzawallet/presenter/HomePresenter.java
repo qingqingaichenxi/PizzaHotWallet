@@ -16,33 +16,7 @@ import retrofit2.Response;
 public class HomePresenter extends BasePresenter {
 
 
-    private Call<BaseResponse<Coin>> queryCoinCall;
 
-
-    //查询发出的请求
-    public void queryCoin(String result) {
-        queryCoinCall = RetrofitHelper.getInstance().getApiService().queryCoin(result);
-        queryCoinCall.enqueue(new Callback<BaseResponse<Coin>>() {
-            @Override
-            public void onResponse(Call<BaseResponse<Coin>> call, Response<BaseResponse<Coin>> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<BaseResponse<Coin>> call, Throwable t) {
-
-            }
-        });
-    }
-
-    @Override
-    public void onDetory() {
-        super.onDetory();
-
-        if(queryCoinCall!=null){
-            queryCoinCall.cancel();
-        }
-    }
 
 
 }
