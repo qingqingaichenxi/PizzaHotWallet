@@ -16,4 +16,6 @@ public class Contant {
     public static final String ISLOGIN = "is_login";
     public static final String USERNAME = "username";
     public static final String USERPWD = "userpwd";
+
+    public static final String USER_ID = "user_id";
 }

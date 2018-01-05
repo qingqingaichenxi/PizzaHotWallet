@@ -2,6 +2,8 @@ package com.xcoinpay.pizza.pizzawallet.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -9,6 +11,7 @@ import android.widget.Toast;
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseActivity;
 import com.xcoinpay.pizza.pizzawallet.bean.Event;
+import com.xcoinpay.pizza.pizzawallet.contant.Contant;
 import com.xcoinpay.pizza.pizzawallet.presenter.SendDetailPresenter;
 import com.xcoinpay.pizza.pizzawallet.util.SPUtils;
 
@@ -31,8 +34,11 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
     @BindView(R.id.btn_send)
     Button btnSend;
 
-    private static final String USER_ID = null;
+//    private static final String USER_ID = null;
     private String result;
+    private String hex;
+    private String walletAddress;
+    private String nonce;
 
     @Override
     public SendDetailPresenter getPresnter() {
@@ -56,6 +62,13 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
         switch (event.code){
             case Event.Code.SendCode:
                 result = (String) event.data;
+                byte[] decode = Base64.decode(result, 0);
+                String s = new String(decode);
+               String[] arr =  s.split(",");
+                hex = arr[0];
+                walletAddress = arr[1];
+                nonce = arr[2];
+                Log.i("result send  ",s);
                 Toast.makeText(this, "扫描成功" + result, Toast.LENGTH_SHORT).show();
 
                 break;
@@ -70,8 +83,14 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
     }
 
     private void sendCoin(String result) {
-        String userId = SPUtils.getString(this, USER_ID);
-//        presenter.sendCoin(result,"4028");
+        String userId = SPUtils.getString(this, Contant.USER_ID);
+        //传4个参数   hex ：合约
+//        userId : 用户id
+//        nonce : 随机数
+//        walletAddress ：钱包地址
+
+
+        presenter.sendCoin(hex,"4028","0",walletAddress);
     }
 
 

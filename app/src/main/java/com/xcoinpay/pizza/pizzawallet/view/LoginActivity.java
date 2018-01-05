@@ -50,7 +50,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
 
     private static final  String USER_NAEM = null;
     private static final String USER_TEL = null;
-    private static final String USER_ID = null;
+//    private static final String USER_ID = null;
     private static final String USER_PASSWD = null;
     private static final String USER_CTIME = null;
 
@@ -88,7 +88,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
                 SPUtils.putString(this, USER_NAEM,user.getName());
                 SPUtils.putString(this, USER_TEL,user.getTel());
                 SPUtils.putString(this,USER_CTIME,user.getCtime());
-                SPUtils.putString(this,USER_ID,user.getId());
+                SPUtils.putString(this,Contant.USER_ID,user.getId());
                 SPUtils.putString(this,USER_PASSWD,user.getPassword());
 
                 startActivity(new Intent(LoginActivity.this,MainActivity.class));

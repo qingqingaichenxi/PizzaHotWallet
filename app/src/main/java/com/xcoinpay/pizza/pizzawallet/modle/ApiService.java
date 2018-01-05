@@ -50,7 +50,8 @@ public interface ApiService {
     //fragmenthome扫描冷钱包发送数字币的信息，发送给后台
     @FormUrlEncoded
     @POST("coinTransfer/saveCoinTransfer")
-    Call<BaseResponse<Coin>> sendCoin( @Field("hex") String address, @Field("userId") String userId);
+    Call<BaseResponse<Coin>> sendCoin( @Field("hex") String hex, @Field("userId") String userId,
+                                       @Field("nonce") String nonce , @Field("walletAddress") String walletAddress );
 
     @FormUrlEncoded
     @POST("coin/getBalance")

@@ -22,8 +22,8 @@ public class SendDetailPresenter extends BasePresenter {
     private Call<BaseResponse<Coin>> sendCoinCall;
 
     //发送发出的请求
-    public void sendCoin(String address, String userid){
-        sendCoinCall = RetrofitHelper.getInstance().getApiService().sendCoin(address,userid);
+    public void sendCoin(String hex, String userId, String nonce, String walletAddress ){
+        sendCoinCall = RetrofitHelper.getInstance().getApiService().sendCoin(hex,userId,nonce,walletAddress);
         sendCoinCall.enqueue(new Callback<BaseResponse<Coin>>() {
             @Override
             public void onResponse(Call<BaseResponse<Coin>> call, Response<BaseResponse<Coin>> response) {
