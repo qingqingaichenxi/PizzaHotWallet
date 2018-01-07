@@ -53,8 +53,10 @@ public class Event {
          * 发送交易码
          * */
 
-        public static final String SuccessSendDtailCode = "205";
+        public static final String SuccessSendDtailCode = "205";//成功
         public static final String FailSendDtailCode = "505";
+        public static final String SendNonceCode = "120";//随机数不正确
+        public static final String SendNonceCode121 = "121";//用户旷工费太低
         public static final String RequestFailsendDetailRegistCode = "7";
 
         /**

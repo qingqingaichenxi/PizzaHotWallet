@@ -1,19 +1,25 @@
 package com.xcoinpay.pizza.pizzawallet.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.base.BaseActivity;
+import com.xcoinpay.pizza.pizzawallet.bean.BaseResponse;
 import com.xcoinpay.pizza.pizzawallet.bean.Event;
+import com.xcoinpay.pizza.pizzawallet.bean.HashWapper;
 import com.xcoinpay.pizza.pizzawallet.contant.Contant;
 import com.xcoinpay.pizza.pizzawallet.presenter.SendDetailPresenter;
 import com.xcoinpay.pizza.pizzawallet.util.SPUtils;
+import com.xcoinpay.pizza.pizzawallet.widget.ProgressDialog;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -38,7 +44,11 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
     private String result;
     private String hex;
     private String walletAddress;
-    private String nonce;
+    private String nonce= "0";
+    private String addresspay;
+    private String count;
+    private String coinId;
+    private ProgressDialog progressDialog;
 
     @Override
     public SendDetailPresenter getPresnter() {
@@ -56,20 +66,26 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
         return R.layout.activity_send_detail;
     }
 
-    //扫描发送数据传过来的信息
+    //扫描发送数据传过来的信息,是从冷端传过来的发送数据
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void onEvent(Event event ) {
         switch (event.code){
             case Event.Code.SendCode:
                 result = (String) event.data;
+                Log.i("+++++++++",result);
                 byte[] decode = Base64.decode(result, 0);
                 String s = new String(decode);
+                Log.i("++++++++",s);
                String[] arr =  s.split(",");
                 hex = arr[0];
                 walletAddress = arr[1];
                 nonce = arr[2];
+                addresspay = arr[3];
+                count = arr[4];
+                coinId = arr[5];
                 Log.i("result send  ",s);
                 Toast.makeText(this, "扫描成功" + result, Toast.LENGTH_SHORT).show();
+                splashUi(addresspay,count,coinId);
 
                 break;
 //            case :
@@ -82,26 +98,92 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
 
     }
 
-    private void sendCoin(String result) {
+    private void splashUi(String addresspay, String count, String coinId) {
+        tvCount.setText(count);
+        tvCoinid.setText(coinId);
+        tvCoinAddress.setText(addresspay);
+
+    }
+
+    private void sendCoin(String nonce) {
         String userId = SPUtils.getString(this, Contant.USER_ID);
+        Log.i("pppppppppp","hex:"+hex);
+        Log.i("pppppppppp","userId:"+userId);
+        Log.i("pppppppppp","nonce:"+nonce);
+        Log.i("pppppppppp","walletAddress:"+walletAddress);
+
+            presenter.sendCoin(hex,userId,nonce,walletAddress);
+
         //传4个参数   hex ：合约
 //        userId : 用户id
 //        nonce : 随机数
 //        walletAddress ：钱包地址
 
 
-        presenter.sendCoin(hex,"4028","0",walletAddress);
+
     }
 
 
 
     @OnClick(R.id.btn_send)
     public void onViewClicked() {
-        Intent intent = new Intent(this, TradeBookActivity.class);
-        intent.putExtra("result", "0000");
-        startActivity(intent);
+//        Intent intent = new Intent(this, TradeBookActivity.class);
+//        intent.putExtra("result", "0000");
+//        startActivity(intent);
+        progressDialog = new ProgressDialog(this,"数据正在加载中... ...");
+        progressDialog.show();
 
-        sendCoin(result);
+        sendCoin(nonce);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)//来自于SendDetailPresenter
+    public void event(Event event) {
+        progressDialog.dismiss();
+        switch (event.code){
+            case Event.Code.SuccessSendDtailCode:
+                HashWapper hashWapper = (HashWapper) event.data;
+                String hashId = hashWapper.getTxHash();
+                BaseResponse.ResponseResult resultData = (BaseResponse.ResponseResult) event.resultData;
+                Toast.makeText(this, resultData.getMsg(), Toast.LENGTH_SHORT).show();
+                showSuccessDialog();
+                break;
+            case Event.Code.SendNonceCode://吧随机数重新设置。然后重新发送一笔交易
+                HashWapper hashWapper1 = (HashWapper) event.data;
+                String nonceRight = hashWapper1.getNonce();
+                BaseResponse.ResponseResult resultData1 = (BaseResponse.ResponseResult) event.resultData;
+//                Toast.makeText(this, resultData1.getMsg()+nonceRight, Toast.LENGTH_SHORT).show();
+                sendCoin(nonceRight);
+                break;
+            case Event.Code.SendNonceCode121:
+                BaseResponse.ResponseResult resultData121 = (BaseResponse.ResponseResult) event.resultData;
+                Toast.makeText(this, resultData121.getMsg(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this,MainActivity.class));
+                break;
+            case Event.Code.FailSendDtailCode:
+                BaseResponse.ResponseResult resultData2 = (BaseResponse.ResponseResult) event.resultData;
+                Toast.makeText(this, resultData2.getMsg(), Toast.LENGTH_SHORT).show();
+                break;
+            case Event.Code.RequestFailsendDetailRegistCode:
+                Toast.makeText(this, "连接服务失败", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+    }
+
+
+    private void showSuccessDialog() {
+        new AlertDialog.Builder(this).
+                setMessage("这笔交易已经发送，是否查看交易记录").
+                setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(getApplicationContext(),TradeBookActivity.class));
+                    }
+                }).
+                setNegativeButton("否",null).
+                show();
+
     }
 
 

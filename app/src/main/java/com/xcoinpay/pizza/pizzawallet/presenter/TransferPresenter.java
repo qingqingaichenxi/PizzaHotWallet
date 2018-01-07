@@ -1,11 +1,8 @@
 package com.xcoinpay.pizza.pizzawallet.presenter;
 
-import android.util.Log;
-
 import com.xcoinpay.pizza.pizzawallet.base.BasePresenter;
 import com.xcoinpay.pizza.pizzawallet.bean.Balance;
 import com.xcoinpay.pizza.pizzawallet.bean.BaseResponse;
-import com.xcoinpay.pizza.pizzawallet.bean.Coin;
 import com.xcoinpay.pizza.pizzawallet.bean.Event;
 import com.xcoinpay.pizza.pizzawallet.modle.RetrofitHelper;
 

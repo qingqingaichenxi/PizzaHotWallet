@@ -20,18 +20,18 @@ import retrofit2.Response;
 
 public class RegistPresenter extends BasePresenter {
 
-    private Call<BaseResponse<User>> sendCall;
-    private Call<BaseResponse<User>> registCall;
+    private Call<BaseResponse<Object>> sendCall;
+    private Call<BaseResponse<Object>> registCall;
 
 
     //注册
     public void regist( String name, String mobileNO, String pwdNo,String code) {
         registCall = RetrofitHelper.getInstance().getApiService().regist(name, mobileNO, pwdNo, code);
-        registCall.enqueue(new Callback<BaseResponse<User>>() {
+        registCall.enqueue(new Callback<BaseResponse<Object>>() {
             @Override
-            public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {
-                BaseResponse<User> body = response.body();
-               User user =  body.data;
+            public void onResponse(Call<BaseResponse<Object>> call, Response<BaseResponse<Object>> response) {
+                BaseResponse<Object> body = response.body();
+                Object user =  body.data;
                BaseResponse.ResponseResult  result = body.getResult();
                if(result.code.equals("200")){
                    EventBus.getDefault().post(new Event(Event.Code.registSuccessCode,user,result));
@@ -42,7 +42,7 @@ public class RegistPresenter extends BasePresenter {
             }
 
             @Override
-            public void onFailure(Call<BaseResponse<User>> call, Throwable t) {
+            public void onFailure(Call<BaseResponse<Object>> call, Throwable t) {
                 EventBus.getDefault().post(new Event(Event.Code.RequestFailRegistCode,null,null));
             }
         });
@@ -52,12 +52,12 @@ public class RegistPresenter extends BasePresenter {
 //发送验证码
     public void sendCode(String phone, int i) {
         sendCall = RetrofitHelper.getInstance().getApiService().sendCode(phone, i);
-        sendCall.enqueue(new Callback<BaseResponse<User>>() {
+        sendCall.enqueue(new Callback<BaseResponse<Object>>() {
             @Override
-            public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {
-                BaseResponse<User> body = response.body();
-               User user = body.data;
-                BaseResponse<User>.ResponseResult result = body.getResult();
+            public void onResponse(Call<BaseResponse<Object>> call, Response<BaseResponse<Object>> response) {
+                BaseResponse<Object> body = response.body();
+                Object user = body.data;
+                BaseResponse<Object>.ResponseResult result = body.getResult();
                 if(result.code.equals("200")){
                     EventBus.getDefault().post(new Event(Event.Code.SecondeRegistSuccessCode,user,result));
                 }
@@ -67,7 +67,7 @@ public class RegistPresenter extends BasePresenter {
             }
 
             @Override
-            public void onFailure(Call<BaseResponse<User>> call, Throwable t) {
+            public void onFailure(Call<BaseResponse<Object>> call, Throwable t) {
                     EventBus.getDefault().post(new Event(Event.Code.RequestFailsendRegistCode,null,null));
             }
         });

@@ -11,6 +11,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
 import com.xcoinpay.pizza.pizzawallet.R;
+import com.xcoinpay.pizza.pizzawallet.contant.Contant;
 import com.xcoinpay.pizza.pizzawallet.util.SPUtils;
 
 import butterknife.BindView;
@@ -19,7 +20,6 @@ import butterknife.ButterKnife;
 public class WelcomeActivity extends AppCompatActivity {
     @BindView(R.id.welcome_img)
     ImageView welcome_img;
-    public static  final String IS_APP_FIRST_OPEN = "is_app_first_open";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class WelcomeActivity extends AppCompatActivity {
         @Override
         public void onAnimationEnd(Animation animation) {
             // 当动画结束后，根据是否打开过软件，判断进入引导界面还是主界面
-            boolean isFirstOpen = SPUtils.getBoolean(getApplicationContext(), IS_APP_FIRST_OPEN, true);
+            boolean isFirstOpen = SPUtils.getBoolean(getApplicationContext(), Contant.IS_APP_FIRST_OPEN, true);
             if(isFirstOpen){
                 // 进入引导界面
                 System.out.println("进入引导界面");

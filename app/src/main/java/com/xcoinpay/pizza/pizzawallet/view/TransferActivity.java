@@ -14,6 +14,7 @@ import com.xcoinpay.pizza.pizzawallet.bean.Balance;
 import com.xcoinpay.pizza.pizzawallet.bean.BaseResponse;
 import com.xcoinpay.pizza.pizzawallet.bean.Event;
 import com.xcoinpay.pizza.pizzawallet.presenter.TransferPresenter;
+import com.xcoinpay.pizza.pizzawallet.widget.ProgressDialog;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -45,6 +46,7 @@ public class TransferActivity extends BaseActivity<TransferPresenter> {
     private String coinId;
     private String myBalance;
     private String nonce;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -75,7 +77,6 @@ public class TransferActivity extends BaseActivity<TransferPresenter> {
 
 
 
-
     }
 //
 //    private void showfragmentData(String result) {
@@ -87,6 +88,8 @@ public class TransferActivity extends BaseActivity<TransferPresenter> {
     @Override
     protected void onStart() {
         super.onStart();
+        progressDialog = new ProgressDialog(this,"加载数据中 ... ...");
+        progressDialog.show();
         presenter.queryCoin(myAddree,id);
 
 
@@ -112,6 +115,7 @@ public class TransferActivity extends BaseActivity<TransferPresenter> {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(Event event) {
+        progressDialog.dismiss();
         switch (event.code) {
             case Event.Code.QuerySuccessCode:
                 Balance balance = (Balance) event.data;

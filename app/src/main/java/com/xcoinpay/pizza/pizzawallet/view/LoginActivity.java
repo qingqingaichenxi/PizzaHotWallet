@@ -48,13 +48,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
     @BindView(R.id.iv_clearpwd)
     ImageView clearpwd;
 
-    private static final  String USER_NAEM = null;
-    private static final String USER_TEL = null;
-//    private static final String USER_ID = null;
-    private static final String USER_PASSWD = null;
-    private static final String USER_CTIME = null;
-
-
 
     @Override
     public LoginPresenter getPresnter() {
@@ -85,11 +78,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
                 User user = (User) event.data;
                 BaseResponse.ResponseResult  resultData = (BaseResponse.ResponseResult) event.resultData;
 
-                SPUtils.putString(this, USER_NAEM,user.getName());
-                SPUtils.putString(this, USER_TEL,user.getTel());
-                SPUtils.putString(this,USER_CTIME,user.getCtime());
+                SPUtils.putString(this, Contant.USER_NAEM,user.getName());
+                SPUtils.putString(this, Contant.USER_TEL,user.getTel());
+                SPUtils.putString(this,Contant.USER_CTIME,user.getCtime());
                 SPUtils.putString(this,Contant.USER_ID,user.getId());
-                SPUtils.putString(this,USER_PASSWD,user.getPassword());
+                SPUtils.putString(this,Contant.USER_PASSWD,user.getPassword());
 
                 startActivity(new Intent(LoginActivity.this,MainActivity.class));
 

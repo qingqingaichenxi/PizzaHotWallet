@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.xcoinpay.pizza.pizzawallet.base.BasePresenter;
 import com.xcoinpay.pizza.pizzawallet.bean.BaseResponse;
-import com.xcoinpay.pizza.pizzawallet.bean.Coin;
+import com.xcoinpay.pizza.pizzawallet.bean.HashWapper;
 import com.xcoinpay.pizza.pizzawallet.bean.Event;
 import com.xcoinpay.pizza.pizzawallet.modle.RetrofitHelper;
 
@@ -19,29 +19,35 @@ import retrofit2.Response;
  */
 
 public class SendDetailPresenter extends BasePresenter {
-    private Call<BaseResponse<Coin>> sendCoinCall;
+    private Call<BaseResponse<HashWapper>> sendCoinCall;
 
     //发送发出的请求
     public void sendCoin(String hex, String userId, String nonce, String walletAddress ){
         sendCoinCall = RetrofitHelper.getInstance().getApiService().sendCoin(hex,userId,nonce,walletAddress);
-        sendCoinCall.enqueue(new Callback<BaseResponse<Coin>>() {
+        sendCoinCall.enqueue(new Callback<BaseResponse<HashWapper>>() {
             @Override
-            public void onResponse(Call<BaseResponse<Coin>> call, Response<BaseResponse<Coin>> response) {
-                BaseResponse<Coin> body = response.body();
-                Coin coin =  body.data;
+            public void onResponse(Call<BaseResponse<HashWapper>> call, Response<BaseResponse<HashWapper>> response) {
+                BaseResponse<HashWapper> body = response.body();
+                HashWapper hashWapper =  body.data;
             BaseResponse.ResponseResult result =  body.getResult();
-            if(result.code.equals(200)){
-                EventBus.getDefault().post(new Event(Event.Code.SuccessSendDtailCode,coin,result));
+            if(result.code.equals("200")){
+                EventBus.getDefault().post(new Event(Event.Code.SuccessSendDtailCode,hashWapper,result));//返回的数据传递给TradeBookActivity
+            }
+            else if(result.code.equals("120")){
+                EventBus.getDefault().post(new Event(Event.Code.SendNonceCode,hashWapper,result));
+            }
+            else if(result.code.equals("121")){
+                EventBus.getDefault().post(new Event(Event.Code.SendNonceCode121,null,result));
             }
             else {
                 Log.i("返回的结果数据",result.code);
-                EventBus.getDefault().post(new Event(Event.Code.FailSendDtailCode,result,null));
+                EventBus.getDefault().post(new Event(Event.Code.FailSendDtailCode,null,result));
             }
 
             }
 
             @Override
-            public void onFailure(Call<BaseResponse<Coin>> call, Throwable t) {
+            public void onFailure(Call<BaseResponse<HashWapper>> call, Throwable t) {
                 EventBus.getDefault().post(new Event(Event.Code.RequestFailsendDetailRegistCode,null,null));
             }
         });

@@ -196,9 +196,10 @@ public class RegistActivity extends BaseActivity<RegistPresenter> {
         switch (event.code){
             //发送验证码的判断
             case "204":
-                User user = (User) event.data;
+
                 BaseResponse.ResponseResult resultData = (BaseResponse.ResponseResult) event.resultData;
                 Toast.makeText(this, resultData.getMsg(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this,LoginActivity.class));
                 break;
             case "504":
                BaseResponse.ResponseResult result = (BaseResponse.ResponseResult) event.data;

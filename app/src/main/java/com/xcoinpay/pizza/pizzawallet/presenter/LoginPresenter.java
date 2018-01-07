@@ -22,22 +22,23 @@ import retrofit2.Response;
 public class LoginPresenter extends BasePresenter {
 
 
-     Call<BaseResponse<User>> userCall;
+     Call<BaseResponse<User.UserWapper>> userCall;
 
     public void login(String phone, String saltpwd) {
 
         userCall = RetrofitHelper.getInstance().getApiService().login(phone, saltpwd);
-        userCall.enqueue(new Callback<BaseResponse<User>>() {
+        userCall.enqueue(new Callback<BaseResponse<User.UserWapper>>() {
             @Override
-            public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {
+            public void onResponse(Call<BaseResponse<User.UserWapper>> call, Response<BaseResponse<User.UserWapper>> response) {
                 Log.i("返回的结果--------------",response.toString());
                 //请求成功，通知UI 更新界面和保存数据
 
-                BaseResponse<User> body = response.body();
-                User  user =  body.data;
-                BaseResponse<User>.ResponseResult result = body.getResult();
+                BaseResponse<User.UserWapper> body = response.body();
+                User  user =  body.data.getUser();
+                BaseResponse<User.UserWapper>.ResponseResult result = body.getResult();
 
                 if(result.code.equals("200")){
+
                     EventBus.getDefault().post(new Event(Event.Code.SuccessCode,user,result));
                 }
                 else {
@@ -50,7 +51,7 @@ public class LoginPresenter extends BasePresenter {
             }
 
             @Override
-            public void onFailure(Call<BaseResponse<User>> call, Throwable t) {
+            public void onFailure(Call<BaseResponse<User.UserWapper>> call, Throwable t) {
                 String message = t.getMessage();
                 String s = t.toString();
                 //请求失败,通知用户

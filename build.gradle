@@ -21,6 +21,9 @@ allprojects {
     repositories {
         google()
         jcenter()
+
+        //数据库
+        maven { url "https://jitpack.io" }
     }
 }
 

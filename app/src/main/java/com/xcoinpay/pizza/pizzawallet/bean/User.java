@@ -51,4 +51,17 @@ public class User {
     public void setCtime(String ctime) {
         this.ctime = ctime;
     }
+
+
+    public static class UserWapper{
+       private User user;
+
+        public User getUser() {
+            return user;
+        }
+
+        public void setUser(User user) {
+            this.user = user;
+        }
+    }
 }

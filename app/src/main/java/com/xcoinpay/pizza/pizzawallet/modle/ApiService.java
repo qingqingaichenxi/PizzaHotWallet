@@ -3,7 +3,7 @@ package com.xcoinpay.pizza.pizzawallet.modle;
 
 import com.xcoinpay.pizza.pizzawallet.bean.Balance;
 import com.xcoinpay.pizza.pizzawallet.bean.BaseResponse;
-import com.xcoinpay.pizza.pizzawallet.bean.Coin;
+import com.xcoinpay.pizza.pizzawallet.bean.HashWapper;
 import com.xcoinpay.pizza.pizzawallet.bean.User;
 
 import retrofit2.Call;
@@ -19,20 +19,20 @@ public interface ApiService {
 
     //登录接口的参数
     @FormUrlEncoded
-    @POST("login")
-    Call<BaseResponse<User>> login(@Field("tel") String mPhone, @Field("password") String mPwd);
+    @POST("user/login")
+    Call<BaseResponse<User.UserWapper>> login(@Field("tel") String mPhone, @Field("password") String mPwd);
 
 
 
     //注册页面发送短信的接口参数
     @FormUrlEncoded
     @POST("user/sendMessage")
-    Call<BaseResponse<User>> sendCode(@Field("tel") String mPhone, @Field("mssageType") int mssageType);
+    Call<BaseResponse<Object>> sendCode(@Field("tel") String mPhone, @Field("mssageType") int mssageType);
 
     //注册页面注册的接口参数
     @FormUrlEncoded
     @POST("user/register")
-    Call<BaseResponse<User>> regist(@Field("name") String name, @Field("tel") String mPhone,
+    Call<BaseResponse<Object>> regist(@Field("name") String name, @Field("tel") String mPhone,
                                     @Field("password") String pwd, @Field("code") String code);
 
 
@@ -50,8 +50,8 @@ public interface ApiService {
     //fragmenthome扫描冷钱包发送数字币的信息，发送给后台
     @FormUrlEncoded
     @POST("coinTransfer/saveCoinTransfer")
-    Call<BaseResponse<Coin>> sendCoin( @Field("hex") String hex, @Field("userId") String userId,
-                                       @Field("nonce") String nonce , @Field("walletAddress") String walletAddress );
+    Call<BaseResponse<HashWapper>> sendCoin(@Field("hex") String hex, @Field("userId") String userId,
+                                            @Field("nonce") String nonce , @Field("walletAddress") String walletAddress );
 
     @FormUrlEncoded
     @POST("coin/getBalance")

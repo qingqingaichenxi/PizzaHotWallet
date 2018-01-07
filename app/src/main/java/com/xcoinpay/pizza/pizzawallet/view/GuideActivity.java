@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.xcoinpay.pizza.pizzawallet.R;
 import com.xcoinpay.pizza.pizzawallet.adapter.WelcomeAdapter;
+import com.xcoinpay.pizza.pizzawallet.contant.Contant;
 import com.xcoinpay.pizza.pizzawallet.util.DensityUtils;
 import com.xcoinpay.pizza.pizzawallet.util.SPUtils;
 
@@ -126,7 +127,7 @@ public class GuideActivity extends AppCompatActivity {
     public void click(View view){
             startActivity(new Intent(this,MainActivity.class));
             finish();
-            SPUtils.putBoolean(this,IS_APP_FIRST_OPEN,false);
+            SPUtils.putBoolean(this, Contant.IS_APP_FIRST_OPEN,false);
 
 
     }
