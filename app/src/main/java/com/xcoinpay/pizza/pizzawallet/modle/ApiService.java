@@ -51,7 +51,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("coinTransfer/saveCoinTransfer")
     Call<BaseResponse<HashWapper>> sendCoin(@Field("hex") String hex, @Field("userId") String userId,
-                                            @Field("nonce") String nonce , @Field("walletAddress") String walletAddress );
+                                            @Field("nonce") String nonce , @Field("walletAddress") String walletAddress ,@Field("coinId") String coinId);
 
     @FormUrlEncoded
     @POST("coin/getBalance")

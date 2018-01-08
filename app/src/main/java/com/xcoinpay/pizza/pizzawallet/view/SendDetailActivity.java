@@ -111,8 +111,10 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
         Log.i("pppppppppp","userId:"+userId);
         Log.i("pppppppppp","nonce:"+nonce);
         Log.i("pppppppppp","walletAddress:"+walletAddress);
+        Log.i("pppppppppp","coinId:"+coinId);
 
-            presenter.sendCoin(hex,userId,nonce,walletAddress);
+
+        presenter.sendCoin(hex,userId,nonce,walletAddress,coinId);
 
         //传4个参数   hex ：合约
 //        userId : 用户id
@@ -152,8 +154,9 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
                 HashWapper hashWapper1 = (HashWapper) event.data;
                 String nonceRight = hashWapper1.getNonce();
                 BaseResponse.ResponseResult resultData1 = (BaseResponse.ResponseResult) event.resultData;
-//                Toast.makeText(this, resultData1.getMsg()+nonceRight, Toast.LENGTH_SHORT).show();
-                sendCoin(nonceRight);
+                Toast.makeText(this, resultData1.getMsg()+"请把输入正确的随机数："+nonceRight, Toast.LENGTH_SHORT).show();
+                showNoceDialog(nonceRight);
+//                sendCoin(nonceRight);
                 break;
             case Event.Code.SendNonceCode121:
                 BaseResponse.ResponseResult resultData121 = (BaseResponse.ResponseResult) event.resultData;
@@ -169,6 +172,20 @@ public class SendDetailActivity extends BaseActivity<SendDetailPresenter> {
                 break;
 
         }
+    }
+
+    private void showNoceDialog(String nonceRight) {
+        new AlertDialog.Builder(this).
+                setMessage("这笔交易的随机数不正确，请在冷端发送页面填写正确的交易序号: "+nonceRight).
+                setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    }
+                }).
+
+                show();
+
     }
 
 
